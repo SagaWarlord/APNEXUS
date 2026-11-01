@@ -1,36 +1,136 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# JOBREADY — Build Your Base. Conquer the Code.
+
+A premium, production-ready event website and competition management platform for **JOBREADY**, a three-round website development challenge hosted at MMMUT, Gorakhpur.
+
+**Event Date:** 6 November 2026  
+**Venue:** Multi Purpose Hall, Madan Mohan Malaviya University of Technology, Gorakhpur, UP, India
+
+---
+
+## Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Framework | Next.js 16 (App Router) + TypeScript |
+| Styling | Tailwind CSS v4 |
+| 3D | React Three Fiber / Three.js |
+| Database | Supabase (PostgreSQL + Auth + Storage) |
+| Forms | React Hook Form + Zod |
+| Animation | Framer Motion |
+| Deployment | Vercel |
+
+---
 
 ## Getting Started
 
-First, run the development server:
+### 1. Clone & Install
+
+```bash
+git clone <your-repo-url>
+cd JobReady
+npm install
+```
+
+### 2. Configure Environment Variables
+
+```bash
+cp .env.example .env.local
+```
+
+Fill in your Supabase credentials in `.env.local`. **Never commit `.env.local`.**
+
+### 3. Set Up Supabase Database
+
+1. Create a new Supabase project at [supabase.com](https://supabase.com).
+2. In the Supabase Dashboard → SQL Editor, run:
+   ```
+   supabase/migrations/001_initial_schema.sql
+   ```
+3. Create a Storage bucket named `presentations` with appropriate RLS policies.
+
+### 4. Set Up Admin Account
+
+1. Register a user through the app or Supabase Dashboard.
+2. In Supabase SQL Editor, grant admin role:
+   ```sql
+   UPDATE public.profiles SET role = 'admin' WHERE email = 'your-admin@email.com';
+   ```
+
+### 5. Run Development Server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Visit [http://localhost:3000](http://localhost:3000)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Project Structure
 
-## Learn More
+```
+src/
+├── app/                    # Next.js App Router pages
+│   ├── page.tsx            # Homepage
+│   ├── login/              # Auth pages
+│   ├── register/
+│   ├── dashboard/          # Participant portal
+│   ├── admin/              # Admin dashboard
+│   └── judge/              # Judge dashboard
+├── components/
+│   ├── layout/             # Navbar, Footer
+│   ├── home/               # Homepage sections
+│   └── three/              # 3D scene components
+├── lib/
+│   ├── supabase/           # Supabase clients
+│   ├── constants.ts        # Event data, rounds, FAQ
+│   └── utils.ts            # Shared utilities
+├── types/                  # TypeScript types
+└── middleware.ts            # Auth middleware
+supabase/
+└── migrations/             # Database schema SQL files
+```
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Competition Structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+| Round | Name | Time | Submission |
+|---|---|---|---|
+| 1 | Frontend Clash | 9:00 AM – 12:00 PM IST | Live frontend URL |
+| 2 | Full-Stack Forge | 12:00 PM – 6:00 PM IST | Website URL + GitHub URL + PPT/PDF |
+| 3 | The Final Arena | 6:00 PM – 9:00 PM IST | Physical presentation at MMMUT |
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Deployment (Vercel)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Connect your GitHub repository to Vercel.
+2. Add all environment variables from `.env.example` in the Vercel dashboard.
+3. Deploy — Vercel will auto-detect Next.js.
+
+```bash
+npm run build   # Verify build passes locally first
+```
+
+---
+
+## Security Notes
+
+- The Supabase service-role key is **never** exposed to the browser.
+- All protected routes use server-side session validation via middleware.
+- Row Level Security (RLS) is enabled on all tables.
+- Team size limit (max 3) is enforced at the database trigger level.
+- File uploads are validated server-side for type and size.
+
+---
+
+## Phase Status
+
+- [x] Phase 0 — Project foundation, architecture, schema
+- [x] Phase 1 — 3D Hero, Navbar, homepage structure  
+- [x] Phase 2 — All public sections
+- [ ] Phase 3 — Full auth + participant portal (Supabase integration)
+- [ ] Phase 4 — Complete backend + real data persistence
+- [ ] Phase 5 — Admin + Judge dashboards + Leaderboard engine
+- [ ] Phase 6 — Security audit + deployment

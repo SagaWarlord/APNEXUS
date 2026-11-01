@@ -1,26 +1,431 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* ============================================================
+   JOBREADY — Fantasy Game Design System
+   Inspired by village-building strategy games
+   ============================================================ */
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Typography */
+  --font-display: "Cinzel", "Georgia", serif;
+  --font-body: "Inter", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", "Courier New", monospace;
+
+  /* Fantasy Palette */
+  --color-gold-primary: #F5A623;
+  --color-gold-light: #FFD700;
+  --color-gold-dark: #B8860B;
+  --color-gold-deep: #8B6914;
+
+  --color-green-forest: #1B4D1F;
+  --color-green-emerald: #2D7A3A;
+  --color-green-light: #4CAF50;
+  --color-green-bright: #66BB6A;
+
+  --color-blue-royal: #1A237E;
+  --color-blue-sky: #42A5F5;
+  --color-blue-deep: #0D47A1;
+
+  --color-stone: #8D6E63;
+  --color-parchment: #FFF8E1;
+  --color-charcoal: #1A1A1A;
+  --color-ash: #2C2C2C;
+
+  --color-crimson: #B71C1C;
+  --color-amber: #FF8F00;
+
+  /* Semantic aliases */
+  --color-background: #0F1E10;
+  --color-surface: #1A2E1C;
+  --color-surface-2: #243825;
+  --color-border: #2D5A30;
+  --color-text-primary: #FFF8E1;
+  --color-text-secondary: #A5C8A8;
+  --color-text-muted: #6B8F6E;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Custom CSS variables for components */
+:root {
+  --gold-glow: 0 0 20px rgba(245, 166, 35, 0.4), 0 0 40px rgba(245, 166, 35, 0.2);
+  --emerald-glow: 0 0 20px rgba(45, 122, 58, 0.5);
+  --border-gold: 1px solid rgba(245, 166, 35, 0.3);
+  --border-emerald: 1px solid rgba(45, 122, 58, 0.4);
+}
+
+/* ============================================================
+   Base Reset & Scrollbar
+   ============================================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: #0F1E10;
+  color: #FFF8E1;
+  font-family: "Inter", "Segoe UI", system-ui, sans-serif;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* Fantasy scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0F1E10;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #F5A623, #B8860B);
+  border-radius: 4px;
+}
+
+/* ============================================================
+   Typography
+   ============================================================ */
+.font-display {
+  font-family: "Cinzel", "Georgia", serif;
+  letter-spacing: 0.05em;
+}
+
+.text-gold {
+  color: #F5A623;
+}
+
+.text-gold-light {
+  color: #FFD700;
+}
+
+.text-emerald {
+  color: #4CAF50;
+}
+
+.text-parchment {
+  color: #FFF8E1;
+}
+
+.text-muted {
+  color: #A5C8A8;
+}
+
+/* Gradient text */
+.gradient-text-gold {
+  background: linear-gradient(135deg, #FFD700 0%, #F5A623 50%, #B8860B 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-emerald {
+  background: linear-gradient(135deg, #66BB6A 0%, #4CAF50 50%, #2D7A3A 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ============================================================
+   Game-Inspired Buttons
+   ============================================================ */
+.btn-gold {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 2rem;
+  font-family: "Cinzel", "Georgia", serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #1A1A1A;
+  background: linear-gradient(135deg, #FFD700 0%, #F5A623 40%, #E8941A 70%, #B8860B 100%);
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  box-shadow:
+    0 4px 0 #8B6914,
+    0 6px 12px rgba(0,0,0,0.4),
+    inset 0 1px 0 rgba(255,255,255,0.3),
+    0 0 20px rgba(245,166,35,0.2);
+  outline: none;
+  text-decoration: none;
+  user-select: none;
+}
+
+.btn-gold:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 6px 0 #8B6914,
+    0 10px 20px rgba(0,0,0,0.5),
+    inset 0 1px 0 rgba(255,255,255,0.3),
+    0 0 30px rgba(245,166,35,0.4);
+  background: linear-gradient(135deg, #FFDF00 0%, #F5A623 40%, #E8941A 70%, #C49A1A 100%);
+}
+
+.btn-gold:active {
+  transform: translateY(2px);
+  box-shadow:
+    0 2px 0 #8B6914,
+    0 2px 6px rgba(0,0,0,0.4),
+    inset 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.btn-outline-gold {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 2rem;
+  font-family: "Cinzel", "Georgia", serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #F5A623;
+  background: transparent;
+  border: 2px solid #F5A623;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: inset 0 0 0 0 rgba(245,166,35,0), 0 0 12px rgba(245,166,35,0.1);
+  outline: none;
+  text-decoration: none;
+  user-select: none;
+}
+
+.btn-outline-gold:hover {
+  background: rgba(245,166,35,0.1);
+  box-shadow: inset 0 0 20px rgba(245,166,35,0.1), 0 0 20px rgba(245,166,35,0.3);
+  transform: translateY(-1px);
+}
+
+.btn-outline-gold:active {
+  transform: translateY(1px);
+}
+
+/* ============================================================
+   Game Cards
+   ============================================================ */
+.game-card {
+  background: linear-gradient(135deg, #1E3520 0%, #152818 100%);
+  border: 1px solid rgba(245, 166, 35, 0.2);
+  border-radius: 12px;
+  box-shadow:
+    0 4px 24px rgba(0,0,0,0.4),
+    inset 0 1px 0 rgba(255,255,255,0.05);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.game-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(245,166,35,0.5), transparent);
+}
+
+.game-card:hover {
+  border-color: rgba(245, 166, 35, 0.5);
+  box-shadow:
+    0 8px 32px rgba(0,0,0,0.5),
+    0 0 24px rgba(245, 166, 35, 0.1),
+    inset 0 1px 0 rgba(255,255,255,0.08);
+  transform: translateY(-4px);
+}
+
+/* ============================================================
+   Section Backgrounds
+   ============================================================ */
+.section-bg-forest {
+  background: linear-gradient(180deg, #0F1E10 0%, #1B2E1D 100%);
+}
+
+.section-bg-emerald {
+  background: linear-gradient(180deg, #152818 0%, #1B3D20 100%);
+}
+
+.section-divider {
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(245,166,35,0.5), transparent);
+  margin: 0;
+}
+
+/* ============================================================
+   Gold border / glow utilities
+   ============================================================ */
+.border-gold {
+  border: 1px solid rgba(245, 166, 35, 0.35);
+}
+
+.glow-gold {
+  box-shadow: var(--gold-glow);
+}
+
+.glow-emerald {
+  box-shadow: var(--emerald-glow);
+}
+
+/* ============================================================
+   Animated Particles Background
+   ============================================================ */
+@keyframes float-particle {
+  0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.6; }
+  33% { transform: translateY(-20px) rotate(120deg); opacity: 1; }
+  66% { transform: translateY(10px) rotate(240deg); opacity: 0.8; }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.shimmer {
+  background: linear-gradient(90deg, #FFD700 25%, #FFFACD 50%, #FFD700 75%);
+  background-size: 200% auto;
+  animation: shimmer 2s linear infinite;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ============================================================
+   Countdown display
+   ============================================================ */
+.countdown-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.75rem 1.25rem;
+  background: rgba(15, 30, 16, 0.8);
+  border: 1px solid rgba(245, 166, 35, 0.4);
+  border-radius: 8px;
+  min-width: 80px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.05);
+}
+
+.countdown-number {
+  font-family: "Cinzel", "Georgia", serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1;
+  background: linear-gradient(135deg, #FFD700, #F5A623);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.countdown-label {
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #A5C8A8;
+  margin-top: 0.25rem;
+}
+
+/* ============================================================
+   Reduced motion
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ============================================================
+   Leaderboard
+   ============================================================ */
+.leaderboard-row {
+  background: rgba(15, 30, 16, 0.6);
+  border: 1px solid rgba(45, 90, 48, 0.4);
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.leaderboard-row:hover {
+  background: rgba(30, 53, 32, 0.8);
+  border-color: rgba(245, 166, 35, 0.3);
+}
+
+.rank-gold { color: #FFD700; }
+.rank-silver { color: #C0C0C0; }
+.rank-bronze { color: #CD7F32; }
+
+/* ============================================================
+   Form elements
+   ============================================================ */
+.game-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: rgba(15, 30, 16, 0.8);
+  border: 1px solid rgba(45, 90, 48, 0.6);
+  border-radius: 8px;
+  color: #FFF8E1;
+  font-size: 0.95rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  outline: none;
+}
+
+.game-input:focus {
+  border-color: rgba(245, 166, 35, 0.6);
+  box-shadow: 0 0 0 3px rgba(245, 166, 35, 0.1);
+}
+
+.game-input::placeholder {
+  color: #6B8F6E;
+}
+
+/* ============================================================
+   Badge / tag
+   ============================================================ */
+.badge-gold {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.2rem 0.7rem;
+  background: rgba(245, 166, 35, 0.15);
+  border: 1px solid rgba(245, 166, 35, 0.4);
+  border-radius: 99px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #F5A623;
+}
+
+.badge-emerald {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.2rem 0.7rem;
+  background: rgba(76, 175, 80, 0.15);
+  border: 1px solid rgba(76, 175, 80, 0.4);
+  border-radius: 99px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #66BB6A;
+}
+
+/* ============================================================
+   Timeline
+   ============================================================ */
+.timeline-line {
+  background: linear-gradient(180deg, #F5A623, #2D7A3A, #1A237E);
 }
