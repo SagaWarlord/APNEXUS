@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Home, Trophy, Code2, Gift, Users, HelpCircle, Menu, X, Crown } from "lucide-react";
+import MagneticButton from "@/components/effects/MagneticButton";
 
 const NAV_ITEMS = [
   { label: "Home",     href: "#home",     icon: Home },
@@ -100,17 +101,19 @@ export default function Navbar() {
                     <Link
                       key={href}
                       href={href}
-                      className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-left cursor-pointer transition-all group relative"
+                      className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-left cursor-pointer transition-all group relative overflow-hidden"
                       style={{
                         color: "#FFFFFF",
                         border: isActive ? `1px solid var(--border-gold)` : "transparent",
                         background: isActive ? "rgba(255, 215, 0, 0.08)" : "transparent",
                       }}
                     >
-                      <Icon className="w-5 h-5" style={{ color: isActive ? "var(--gold-primary)" : "var(--text-dim)" }} />
+                      <Icon className="w-5 h-5 transition-transform duration-300 group-hover:scale-110" style={{ color: isActive ? "var(--gold-primary)" : "var(--text-dim)" }} />
                       <span className="text-sm font-medium tracking-wide font-cinzel transition-colors group-hover:text-white">
                         {label}
                       </span>
+                      {/* Golden glow underline */}
+                      <span className={`absolute bottom-0.5 left-3 right-3 h-[2px] rounded-full transition-transform duration-300 origin-center ${isActive ? "scale-x-100 bg-gradient-to-r from-transparent via-[#FFD700] to-transparent shadow-[0_0_8px_#FFD700]" : "scale-x-0 group-hover:scale-x-100 bg-gradient-to-r from-transparent via-[#FFD700] to-transparent"}`} />
                     </Link>
                   );
                 }
@@ -119,17 +122,19 @@ export default function Navbar() {
                   <button
                     key={href}
                     onClick={() => handleNavClick(href)}
-                    className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-left cursor-pointer transition-all group relative"
+                    className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-left cursor-pointer transition-all group relative overflow-hidden"
                     style={{
                       color: "#FFFFFF",
                       border: isActive ? `1px solid var(--border-gold)` : "transparent",
                       background: isActive ? "rgba(255, 215, 0, 0.08)" : "transparent",
                     }}
                   >
-                    <Icon className="w-5 h-5" style={{ color: isActive ? "var(--gold-primary)" : "var(--text-dim)" }} />
+                    <Icon className="w-5 h-5 transition-transform duration-300 group-hover:scale-110" style={{ color: isActive ? "var(--gold-primary)" : "var(--text-dim)" }} />
                     <span className="text-sm font-medium tracking-wide font-cinzel transition-colors group-hover:text-white">
                       {label}
                     </span>
+                    {/* Golden glow underline */}
+                    <span className={`absolute bottom-0.5 left-3 right-3 h-[2px] rounded-full transition-transform duration-300 origin-center ${isActive ? "scale-x-100 bg-gradient-to-r from-transparent via-[#FFD700] to-transparent shadow-[0_0_8px_#FFD700]" : "scale-x-0 group-hover:scale-x-100 bg-gradient-to-r from-transparent via-[#FFD700] to-transparent"}`} />
                   </button>
                 );
               })}
@@ -137,9 +142,11 @@ export default function Navbar() {
 
             {/* ── Register Now CTA -> /register ── */}
             <div className="hidden lg:block">
-              <Link href="/register" className="btn-game text-sm px-7 py-3 inline-block">
-                Register Now &nbsp;›
-              </Link>
+              <MagneticButton strength={0.3} glowRadius={110}>
+                <Link href="/register" className="btn-game text-sm px-7 py-3 inline-block">
+                  Register Now &nbsp;›
+                </Link>
+              </MagneticButton>
             </div>
 
             {/* ── Mobile toggle ── */}

@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Cinzel, Inter, Lilita_One } from "next/font/google";
 import "./globals.css";
+import CustomCursor from "@/components/effects/CustomCursor";
 
 // Game-title font: chunky, bold, perfect for JOBREADY heading
 const lilitaOne = Lilita_One({
@@ -41,7 +42,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${lilitaOne.variable} ${cinzel.variable} ${inter.variable}`}>
+    <html lang="en" data-scroll-behavior="smooth" className={`${lilitaOne.variable} ${cinzel.variable} ${inter.variable}`}>
       <head>
         <link
           rel="preload"
@@ -57,6 +58,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body className="bg-[#1A1208] text-white overflow-x-hidden antialiased">
+        <CustomCursor />
         {children}
       </body>
     </html>

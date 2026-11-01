@@ -633,3 +633,24 @@ body {
     0 8px 16px rgba(0, 0, 0, 0.5),
     0 0 20px rgba(255, 215, 0, 0.3);
 }
+
+/* ================================================================
+   Custom Golden 3D Cursor Utility — Disable Default Browser Cursor
+   ================================================================ */
+@media (pointer: fine) {
+  html,
+  body,
+  *,
+  *::before,
+  *::after {
+    cursor: none !important;
+  }
+
+  /* Restore native text cursor inside form inputs, textareas, and editable text */
+  input:not([type="button"]):not([type="submit"]):not([type="reset"]):not([type="checkbox"]):not([type="radio"]),
+  textarea,
+  select,
+  [contenteditable="true"] {
+    cursor: text !important;
+  }
+}

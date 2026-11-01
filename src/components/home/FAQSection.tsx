@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import CinematicReveal from "@/components/effects/CinematicReveal";
 
 const FAQS = [
   {
@@ -34,57 +36,71 @@ export default function FAQSection() {
   const [open, setOpen] = useState<number | null>(null);
 
   return (
-    <section id="faq" className="relative py-20 section-dark overflow-hidden">
+    <section id="faq" className="relative py-20 section-dark overflow-hidden scroll-mt-20">
       <div className="gold-divider absolute top-0 left-0 right-0" />
 
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
-        <div className="text-center mb-12">
+        <CinematicReveal variant="mask" className="text-center mb-12">
           <div className="wood-banner text-base sm:text-lg">FAQ</div>
           <p className="text-sm sm:text-base mt-6" style={{ color: "#9B7A40" }}>
             Everything you need to know about JOBREADY.
           </p>
-        </div>
+        </CinematicReveal>
 
         <div className="space-y-3">
           {FAQS.map(({ q, a }, i) => {
             const isOpen = open === i;
             return (
-              <div
-                key={i}
-                className="faq-item cursor-pointer"
-                style={{ borderColor: isOpen ? "rgba(255,215,0,0.5)" : "rgba(200,160,40,0.25)" }}
-                onClick={() => setOpen(isOpen ? null : i)}
-              >
-                {/* Question */}
-                <div className="flex items-center justify-between gap-4 px-5 sm:px-6 py-5">
-                  <h3
-                    className="font-cinzel font-semibold text-sm sm:text-base leading-snug"
-                    style={{ color: isOpen ? "#FFD700" : "#F5E6C8" }}
-                  >
-                    {q}
-                  </h3>
-                  <ChevronDown
-                    className="w-5 h-5 flex-shrink-0 transition-transform duration-250"
-                    style={{
-                      color: "#C87A00",
-                      transform: isOpen ? "rotate(180deg)" : "rotate(0deg)",
-                    }}
-                  />
-                </div>
-
-                {/* Answer */}
-                {isOpen && (
-                  <div
-                    className="px-5 sm:px-6 pb-5 border-t"
-                    style={{ borderColor: "rgba(200,160,40,0.15)" }}
-                  >
-                    <p className="text-sm sm:text-base leading-relaxed pt-4" style={{ color: "#C4A878" }}>
-                      {a}
-                    </p>
+              <CinematicReveal key={i} variant="fade-up" delay={i * 0.08}>
+                <div
+                  className="faq-item cursor-pointer transition-all duration-300"
+                  style={{
+                    borderColor: isOpen ? "rgba(255,215,0,0.5)" : "rgba(200,160,40,0.25)",
+                    boxShadow: isOpen ? "0 4px 20px rgba(0,0,0,0.4), 0 0 15px rgba(255,215,0,0.08)" : undefined,
+                  }}
+                  onClick={() => setOpen(isOpen ? null : i)}
+                >
+                  {/* Question */}
+                  <div className="flex items-center justify-between gap-4 px-5 sm:px-6 py-5">
+                    <h3
+                      className="font-cinzel font-semibold text-sm sm:text-base leading-snug transition-colors duration-200"
+                      style={{ color: isOpen ? "#FFD700" : "#F5E6C8" }}
+                    >
+                      {q}
+                    </h3>
+                    <ChevronDown
+                      className="w-5 h-5 flex-shrink-0 transition-transform duration-300"
+                      style={{
+                        color: isOpen ? "#FFD700" : "#C87A00",
+                        transform: isOpen ? "rotate(180deg)" : "rotate(0deg)",
+                      }}
+                    />
                   </div>
-                )}
-              </div>
+
+                  {/* Silky smooth animated answer */}
+                  <AnimatePresence>
+                    {isOpen && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.3, ease: [0.25, 1, 0.5, 1] }}
+                        className="overflow-hidden"
+                      >
+                        <div
+                          className="px-5 sm:px-6 pb-5 border-t"
+                          style={{ borderColor: "rgba(200,160,40,0.15)" }}
+                        >
+                          <p className="text-sm sm:text-base leading-relaxed pt-4" style={{ color: "#C4A878" }}>
+                            {a}
+                          </p>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              </CinematicReveal>
             );
           })}
         </div>

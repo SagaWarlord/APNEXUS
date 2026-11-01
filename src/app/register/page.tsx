@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
+import MagneticButton from "@/components/effects/MagneticButton";
 import {
   ArrowLeft,
   Crown,
@@ -857,12 +858,14 @@ export default function RegisterPage() {
                 REGISTER TEAM BUTTON (Uses You Blockhead font)
             ──────────────────────────────────────────────── */}
             <div className="pt-4 text-center">
-              <button
-                type="submit"
-                className="btn-game btn-register-team w-full sm:w-auto text-lg sm:text-xl px-12 sm:px-20 py-4 sm:py-5 uppercase tracking-wider cursor-pointer"
-              >
-                REGISTER TEAM &nbsp;›
-              </button>
+              <MagneticButton strength={0.35} glowRadius={170}>
+                <button
+                  type="submit"
+                  className="btn-game btn-register-team w-full sm:w-auto text-lg sm:text-xl px-12 sm:px-20 py-4 sm:py-5 uppercase tracking-wider cursor-pointer"
+                >
+                  REGISTER TEAM &nbsp;›
+                </button>
+              </MagneticButton>
 
               <p className="text-xs text-[#8B7355] font-cinzel mt-4 tracking-wider">
                 Please double-check all member details before submitting.

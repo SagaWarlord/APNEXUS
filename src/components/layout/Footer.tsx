@@ -1,6 +1,7 @@
 "use client";
 
 import { Crown, Mail, MapPin, Calendar } from "lucide-react";
+import CinematicReveal from "@/components/effects/CinematicReveal";
 
 const NAV_LINKS = [
   { label: "Home",     href: "#home" },
@@ -59,7 +60,7 @@ export default function Footer() {
     >
       <div className="gold-divider" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+      <CinematicReveal variant="fade-up" duration={0.8} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
 
           {/* Brand */}
@@ -165,7 +166,7 @@ export default function Footer() {
           <p>© {CURRENT_YEAR} JOBREADY. All rights reserved. MMMUT, Gorakhpur.</p>
           <p className="italic">JobReady is an independent student tech event. Not affiliated with Supercell.</p>
         </div>
-      </div>
+      </CinematicReveal>
     </footer>
   );
 }

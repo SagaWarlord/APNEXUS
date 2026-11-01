@@ -8,10 +8,14 @@ import PrizesSection from "@/components/home/PrizesSection";
 import LeaderboardSection from "@/components/home/LeaderboardSection";
 import RegistrationCTA from "@/components/home/RegistrationCTA";
 import FAQSection from "@/components/home/FAQSection";
+import ScrollProgress from "@/components/effects/ScrollProgress";
+import GoldenParticleCursor from "@/components/effects/GoldenParticleCursor";
 
 export default function HomePage() {
   return (
     <>
+      <ScrollProgress />
+      <GoldenParticleCursor />
       <Navbar />
       <main>
         <HeroSection />
