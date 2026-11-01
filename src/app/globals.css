@@ -275,18 +275,21 @@ body {
 }
 
 /* ================================================================
-   Game Panels — stone / wood texture feel with physical depth
+   Custom Font — You Blockhead
+   Reference: Bold, chunky, theatrical display font for impact
    ================================================================ */
-.game-panel {
-  background: linear-gradient(145deg, var(--stone-dark) 0%, var(--stone-medium) 50%, var(--stone-dark) 100%);
-  border: 2px solid var(--border-gold);
-  border-radius: 10px;
-  box-shadow:
-    0 8px 28px rgba(0, 0, 0, 0.7),
-    inset 0 1px 0 rgba(255, 215, 0, 0.15),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.35);
-  position: relative;
-  overflow: hidden;
+@font-face {
+  font-family: "You Blockhead";
+  src: url("/assets/fonts/you-blockhead.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* Apply You Blockhead font exclusively to the Hero Section Register Now button.
+   The #home parent ID ensures this only targets the HeroSection button,
+   NOT the Navbar Register buttons (which are fixed-position, not inside #home). */
+#home .btn-game {
+  font-family: "You Blockhead", "Cinzel", serif;
 }
 
 .game-panel::before {
