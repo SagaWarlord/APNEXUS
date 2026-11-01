@@ -48,10 +48,10 @@ export default function Navbar() {
         className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
         style={{
           background: scrolled
-            ? "rgba(18, 12, 6, 0.92)"
+            ? "var(--theme-nav-bg)"
             : "rgba(10, 6, 2, 0.75)",
           backdropFilter: scrolled ? "blur(16px)" : "blur(8px)",
-          borderBottom: `1px solid ${`rgba(255, 215, 0, ${scrolled ? 0.45 : 0.25})`}`,
+          borderBottom: `1px solid var(--theme-nav-border)`,
           boxShadow: scrolled ? "0 4px 24px rgba(0, 0, 0, 0.6)" : "none",
         }}
       >

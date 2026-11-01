@@ -56,8 +56,8 @@ export default function FAQSection() {
                 <div
                   className="faq-item cursor-pointer transition-all duration-300"
                   style={{
-                    borderColor: isOpen ? "rgba(255,215,0,0.5)" : "rgba(200,160,40,0.25)",
-                    boxShadow: isOpen ? "0 4px 20px rgba(0,0,0,0.4), 0 0 15px rgba(255,215,0,0.08)" : undefined,
+                    borderColor: isOpen ? "var(--theme-border-card-hover)" : "var(--theme-faq-border)",
+                    boxShadow: isOpen ? "0 4px 20px rgba(0,0,0,0.4), 0 0 15px var(--theme-card-shadow-glow)" : undefined,
                   }}
                   onClick={() => setOpen(isOpen ? null : i)}
                 >
@@ -90,7 +90,7 @@ export default function FAQSection() {
                       >
                         <div
                           className="px-5 sm:px-6 pb-5 border-t"
-                          style={{ borderColor: "rgba(200,160,40,0.15)" }}
+                          style={{ borderColor: "var(--theme-faq-border)" }}
                         >
                           <p className="text-sm sm:text-base leading-relaxed pt-4" style={{ color: "#C4A878" }}>
                             {a}

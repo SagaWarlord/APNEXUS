@@ -54,8 +54,8 @@ export default function Footer() {
     <footer
       className="relative"
       style={{
-        background: "linear-gradient(180deg, #120D08 0%, #0A0602 100%)",
-        borderTop: "2px solid rgba(200,160,40,0.2)",
+        background: "linear-gradient(180deg, var(--theme-footer-bg-top) 0%, var(--theme-footer-bg-bottom) 100%)",
+        borderTop: "2px solid var(--theme-footer-border)",
       }}
     >
       <div className="gold-divider" />

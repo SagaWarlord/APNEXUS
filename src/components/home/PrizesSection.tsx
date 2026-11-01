@@ -56,7 +56,7 @@ export default function PrizesSection() {
         🏆
       </ParallaxElement>
       <div className="absolute inset-0 pointer-events-none"
-        style={{ background: "radial-gradient(ellipse at 50% 100%, rgba(200,122,0,0.08) 0%, transparent 60%)" }} />
+        style={{ background: "radial-gradient(ellipse at 50% 100%, var(--theme-rounds-glow) 0%, transparent 60%)" }} />
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
@@ -79,7 +79,7 @@ export default function PrizesSection() {
                 <div
                   className="relative text-center h-full flex flex-col justify-between"
                   style={{
-                    background: `linear-gradient(145deg, #1C1510, #251D14)`,
+                    background: `linear-gradient(145deg, var(--theme-bg-card), var(--theme-bg-card-secondary))`,
                     border: `2px solid ${border}`,
                     borderRadius: "14px",
                     boxShadow: `0 8px 32px rgba(0,0,0,0.6), 0 0 ${featured ? "40px" : "20px"} ${glow}`,

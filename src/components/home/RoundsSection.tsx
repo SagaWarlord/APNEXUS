@@ -59,7 +59,7 @@ export default function RoundsSection() {
 
       {/* Background glow */}
       <div className="absolute inset-0 pointer-events-none"
-        style={{ background: "radial-gradient(ellipse at 50% 0%, rgba(200,122,0,0.06) 0%, transparent 60%)" }} />
+        style={{ background: "radial-gradient(ellipse at 50% 0%, var(--theme-rounds-glow) 0%, transparent 60%)" }} />
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}

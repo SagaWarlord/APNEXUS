@@ -10,10 +10,12 @@ import RegistrationCTA from "@/components/home/RegistrationCTA";
 import FAQSection from "@/components/home/FAQSection";
 import ScrollProgress from "@/components/effects/ScrollProgress";
 import GoldenParticleCursor from "@/components/effects/GoldenParticleCursor";
+import ThemeTransform from "@/components/effects/ThemeTransform";
 
 export default function HomePage() {
   return (
     <>
+      <ThemeTransform />
       <ScrollProgress />
       <GoldenParticleCursor />
       <Navbar />

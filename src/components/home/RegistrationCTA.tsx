@@ -15,10 +15,10 @@ export default function RegistrationCTA() {
         className="absolute inset-0"
         style={{
           background: `
-            radial-gradient(ellipse at 50% 0%,   rgba(180,90,0,0.25) 0%, transparent 55%),
+            radial-gradient(ellipse at 50% 0%,   var(--theme-cta-glow) 0%, transparent 55%),
             radial-gradient(ellipse at 20% 100%, rgba(120,50,0,0.15) 0%, transparent 50%),
             radial-gradient(ellipse at 80% 100%, rgba(100,40,0,0.15) 0%, transparent 50%),
-            linear-gradient(180deg, #1E1510 0%, #2A1C0E 50%, #1E1510 100%)
+            linear-gradient(180deg, var(--theme-bg-section-stone-start) 0%, var(--theme-bg-section-stone-mid) 50%, var(--theme-bg-section-stone-start) 100%)
           `,
         }}
       />

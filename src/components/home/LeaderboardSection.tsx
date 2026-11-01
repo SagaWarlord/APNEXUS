@@ -22,7 +22,7 @@ export default function LeaderboardSection() {
             <div
               className="py-16 px-8 rounded-2xl"
               style={{
-                background: "linear-gradient(145deg, #1C1510, #251D14)",
+                background: "linear-gradient(145deg, var(--theme-bg-card), var(--theme-bg-card-secondary))",
                 border: "2px solid rgba(200,160,40,0.3)",
                 boxShadow: "0 8px 32px rgba(0,0,0,0.6)",
               }}
