@@ -24,11 +24,11 @@ export default function ScheduleSection() {
         {/* Header */}
         <div className="text-center mb-16">
           <div className="badge-gold inline-flex mb-4">📅 Event Day</div>
-          <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-black text-[#FFF8E1] mb-4">
+          <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-black text-white mb-4">
             DAY{" "}
             <span className="gradient-text-gold">SCHEDULE</span>
           </h2>
-          <p className="text-[#A5C8A8] text-lg">
+          <p className="text-white text-lg">
             6 November 2026 — Multi Purpose Hall, MMMUT, Gorakhpur
           </p>
         </div>
@@ -67,17 +67,17 @@ export default function ScheduleSection() {
                       >
                         <div className="flex items-center gap-2 mb-1">
                           <Clock className="w-3.5 h-3.5" style={{ color: colors.dot }} />
-                          <span className="text-xs font-bold tracking-wider" style={{ color: colors.dot }}>
+                          <span className="text-xs font-bold tracking-wider" style={{ color: "#FFFFFF" }}>
                             {item.time}
                           </span>
                         </div>
-                        <h3 className="font-display font-bold text-[#FFF8E1] text-lg mb-1">{item.label}</h3>
-                        <p className="text-[#A5C8A8] text-sm mb-3">{item.sub}</p>
+                        <h3 className="font-display font-bold text-white text-lg mb-1">{item.label}</h3>
+                        <p className="text-white text-sm mb-3">{item.sub}</p>
 
                         {subs.length > 0 && (
                           <ul className="space-y-1.5">
                             {subs.map((s) => (
-                              <li key={s} className="flex items-center gap-2 text-xs text-[#A5C8A8]">
+                              <li key={s} className="flex items-center gap-2 text-xs text-white">
                                 <Check className="w-3.5 h-3.5 flex-shrink-0" style={{ color: colors.dot }} />
                                 {s}
                               </li>
@@ -94,10 +94,10 @@ export default function ScheduleSection() {
 
           {/* Tracks section */}
           <div>
-            <h3 className="font-display text-2xl font-bold text-[#FFF8E1] mb-6 text-center lg:text-left">
+            <h3 className="font-display text-2xl font-bold text-white mb-6 text-center lg:text-left">
               CHALLENGE <span className="gradient-text-gold">TRACKS</span>
             </h3>
-            <p className="text-[#A5C8A8] text-sm mb-8 text-center lg:text-left">
+            <p className="text-white text-sm mb-8 text-center lg:text-left">
               Three challenge categories judge different dimensions of your project.
             </p>
 
@@ -106,10 +106,10 @@ export default function ScheduleSection() {
                 <div key={id} className="game-card p-6 flex gap-4 items-start">
                   <div className="text-3xl flex-shrink-0">{icon}</div>
                   <div>
-                    <h4 className="font-display font-bold text-[#F5A623] text-sm tracking-wider uppercase mb-1">
+                    <h4 className="font-display font-bold text-white text-sm tracking-wider uppercase mb-1">
                       {name}
                     </h4>
-                    <p className="text-[#A5C8A8] text-sm leading-relaxed">{description}</p>
+                    <p className="text-white text-sm leading-relaxed">{description}</p>
                   </div>
                 </div>
               ))}
@@ -117,13 +117,13 @@ export default function ScheduleSection() {
 
             {/* Event date callout */}
             <div className="mt-8 p-6 rounded-xl bg-gradient-to-r from-[rgba(245,166,35,0.1)] to-[rgba(245,166,35,0.05)] border border-[rgba(245,166,35,0.3)]">
-              <p className="font-display text-center text-[#FFD700] font-bold text-lg">
+              <p className="font-display text-center text-white font-bold text-lg">
                 📅 6 November 2026
               </p>
-              <p className="text-center text-[#A5C8A8] text-sm mt-1">
+              <p className="text-center text-white text-sm mt-1">
                 9:00 AM – 9:00 PM IST
               </p>
-              <p className="text-center text-[#6B8F6E] text-xs mt-1">
+              <p className="text-center text-white text-xs mt-1">
                 Multi Purpose Hall, MMMUT, Gorakhpur
               </p>
             </div>

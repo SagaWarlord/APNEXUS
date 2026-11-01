@@ -43,7 +43,7 @@ const RankIcon = ({ rank }: { rank: number }) => {
   if (rank === 1) return <Trophy className="w-5 h-5 text-[#FFD700]" />;
   if (rank === 2) return <Medal className="w-5 h-5 text-[#C0C0C0]" />;
   if (rank === 3) return <Award className="w-5 h-5 text-[#CD7F32]" />;
-  return <span className="text-sm text-[#6B8F6E] font-bold w-5 text-center">{rank}</span>;
+  return <span className="text-sm text-white font-bold w-5 text-center">{rank}</span>;
 };
 
 export default function LeaderboardSection() {
@@ -58,10 +58,10 @@ export default function LeaderboardSection() {
         {/* Header */}
         <div className="text-center mb-12">
           <div className="badge-gold inline-flex mb-4">🏆 Rankings</div>
-          <h2 className="font-display text-4xl sm:text-5xl font-black text-[#FFF8E1] mb-4">
+          <h2 className="font-display text-4xl sm:text-5xl font-black text-white mb-4">
             <span className="gradient-text-gold">LEADERBOARD</span>
           </h2>
-          <p className="text-[#A5C8A8] text-base">
+          <p className="text-white text-base">
             Live rankings across all three rounds.
           </p>
         </div>
@@ -82,7 +82,7 @@ export default function LeaderboardSection() {
 
             {/* Dev preview note */}
             <div className="mt-8 p-4 rounded-lg bg-[rgba(245,166,35,0.08)] border border-[rgba(245,166,35,0.2)]">
-              <p className="text-[#F5A623] text-xs font-bold tracking-wider uppercase mb-2">
+              <p className="text-white text-xs font-bold tracking-wider uppercase mb-2">
                 Development Preview (not real data)
               </p>
 
@@ -94,8 +94,8 @@ export default function LeaderboardSection() {
                     onClick={() => setActiveTab(tab)}
                     className={`px-4 py-1.5 rounded-full text-xs font-bold tracking-wider uppercase transition-all ${
                       activeTab === tab
-                        ? "bg-[#F5A623] text-[#1A1A1A]"
-                        : "text-[#F5A623] border border-[rgba(245,166,35,0.3)] hover:bg-[rgba(245,166,35,0.08)]"
+                        ? "bg-[#F5A623] text-white"
+                        : "text-white border border-[rgba(245,166,35,0.3)] hover:bg-[rgba(245,166,35,0.08)]"
                     }`}
                   >
                     {tab}
@@ -106,7 +106,7 @@ export default function LeaderboardSection() {
               <div className="overflow-x-auto">
                 <table className="w-full text-sm">
                   <thead>
-                    <tr className="text-[#6B8F6E] text-xs tracking-wider uppercase border-b border-[rgba(45,90,48,0.3)]">
+                    <tr className="text-white text-xs tracking-wider uppercase border-b border-[rgba(45,90,48,0.3)]">
                       <th className="text-left pb-3 pl-2">Rank</th>
                       <th className="text-left pb-3">Team</th>
                       <th className="text-left pb-3">ID</th>
@@ -131,17 +131,17 @@ export default function LeaderboardSection() {
                             <RankIcon rank={entry.rank} />
                           </div>
                         </td>
-                        <td className="py-3 font-semibold text-[#FFF8E1]">{entry.team}</td>
-                        <td className="py-3 text-[#6B8F6E] font-mono text-xs">{entry.id}</td>
+                        <td className="py-3 font-semibold text-white">{entry.team}</td>
+                        <td className="py-3 text-white font-mono text-xs">{entry.id}</td>
                         {activeTab === "Overall" ? (
                           <>
-                            <td className="py-3 text-center text-[#A5C8A8]">{entry.r1}</td>
-                            <td className="py-3 text-center text-[#A5C8A8]">{entry.r2}</td>
-                            <td className="py-3 text-center text-[#A5C8A8]">{entry.r3}</td>
-                            <td className="py-3 text-right pr-2 font-bold text-[#FFD700]">{entry.total}</td>
+                            <td className="py-3 text-center text-white">{entry.r1}</td>
+                            <td className="py-3 text-center text-white">{entry.r2}</td>
+                            <td className="py-3 text-center text-white">{entry.r3}</td>
+                            <td className="py-3 text-right pr-2 font-bold text-white">{entry.total}</td>
                           </>
                         ) : (
-                          <td className="py-3 text-right pr-2 font-bold text-[#FFD700]">{entry.score}</td>
+                          <td className="py-3 text-right pr-2 font-bold text-white">{entry.score}</td>
                         )}
                         <td className="py-3 text-center">
                           <span className={`badge-${entry.qualified ? "emerald" : "gold"} text-xs`}>
@@ -157,7 +157,7 @@ export default function LeaderboardSection() {
           </div>
         ) : (
           // Real published leaderboard goes here (populated from Supabase)
-          <div className="text-center text-[#6B8F6E]">Loading published results...</div>
+          <div className="text-center text-white">Loading published results...</div>
         )}
       </div>
 

@@ -18,12 +18,12 @@ export default function RegistrationCTA() {
         {/* Main heading */}
         <div className="mb-8">
           <div className="badge-gold inline-flex mb-6">⚔ Join the Battle</div>
-          <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-black text-[#FFF8E1] leading-tight mb-6">
+          <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-black text-white leading-tight mb-6">
             YOUR TEAM.{" "}
             <span className="gradient-text-gold">YOUR STRATEGY.</span>
             {" "}YOUR VICTORY.
           </h2>
-          <p className="text-[#A5C8A8] text-lg max-w-2xl mx-auto leading-relaxed">
+          <p className="text-white text-lg max-w-2xl mx-auto leading-relaxed">
             Assemble your squad, sharpen your code and prepare for the ultimate web development challenge.
             The arena awaits.
           </p>
@@ -42,8 +42,8 @@ export default function RegistrationCTA() {
             >
               <Icon className="w-6 h-6 text-[#F5A623] flex-shrink-0" />
               <div className="text-left">
-                <p className="text-xs text-[#6B8F6E] tracking-wider uppercase">{label}</p>
-                <p className="font-display font-bold text-[#FFF8E1] text-sm">{value}</p>
+                <p className="text-xs text-white tracking-wider uppercase">{label}</p>
+                <p className="font-display font-bold text-white text-sm">{value}</p>
               </div>
             </div>
           ))}
@@ -61,7 +61,7 @@ export default function RegistrationCTA() {
         </div>
 
         {/* Trust note */}
-        <p className="text-[#6B8F6E] text-sm mt-8">
+        <p className="text-white text-sm mt-8">
           Free to participate. Open to all students. Maximum 3 members per team.
         </p>
       </div>

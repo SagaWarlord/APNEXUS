@@ -1,431 +1,530 @@
 @import "tailwindcss";
 
-/* ============================================================
-   JOBREADY — Fantasy Game Design System
-   Inspired by village-building strategy games
-   ============================================================ */
+/* ================================================================
+   JOBREADY — Fantasy Strategy Game Design System
+   Reference: Clash-of-Clans-inspired colourful battlefield aesthetic
+   ================================================================ */
 
 @theme inline {
-  /* Typography */
-  --font-display: "Cinzel", "Georgia", serif;
-  --font-body: "Inter", "Segoe UI", system-ui, sans-serif;
-  --font-mono: "JetBrains Mono", "Courier New", monospace;
-
-  /* Fantasy Palette */
-  --color-gold-primary: #F5A623;
-  --color-gold-light: #FFD700;
-  --color-gold-dark: #B8860B;
-  --color-gold-deep: #8B6914;
-
-  --color-green-forest: #1B4D1F;
-  --color-green-emerald: #2D7A3A;
-  --color-green-light: #4CAF50;
-  --color-green-bright: #66BB6A;
-
-  --color-blue-royal: #1A237E;
-  --color-blue-sky: #42A5F5;
-  --color-blue-deep: #0D47A1;
-
-  --color-stone: #8D6E63;
-  --color-parchment: #FFF8E1;
-  --color-charcoal: #1A1A1A;
-  --color-ash: #2C2C2C;
-
-  --color-crimson: #B71C1C;
-  --color-amber: #FF8F00;
-
-  /* Semantic aliases */
-  --color-background: #0F1E10;
-  --color-surface: #1A2E1C;
-  --color-surface-2: #243825;
-  --color-border: #2D5A30;
-  --color-text-primary: #FFF8E1;
-  --color-text-secondary: #A5C8A8;
-  --color-text-muted: #6B8F6E;
+  --font-lilita: var(--font-lilita);
+  --font-cinzel: var(--font-cinzel);
+  --font-body: var(--font-inter);
 }
 
-/* Custom CSS variables for components */
+/* ================================================================
+   CSS Custom Properties — single source of truth for colours
+   ================================================================ */
 :root {
-  --gold-glow: 0 0 20px rgba(245, 166, 35, 0.4), 0 0 40px rgba(245, 166, 35, 0.2);
-  --emerald-glow: 0 0 20px rgba(45, 122, 58, 0.5);
-  --border-gold: 1px solid rgba(245, 166, 35, 0.3);
-  --border-emerald: 1px solid rgba(45, 122, 58, 0.4);
+  /* Gold / metallic */
+  --gold-bright:    #FFE566;
+  --gold-primary:   #FFD700;
+  --gold-medium:    #F5A623;
+  --gold-dark:      #C87A00;
+  --gold-shadow:    #8B4A00;
+  --gold-metallic:  #FFF3B0;
+
+  /* Brown / wood */
+  --brown-dark:     #2D0E00;
+  --brown-rich:     #4A1E00;
+  --brown-medium:   #6B3A1F;
+  --brown-light:    #9B6B3A;
+  --brown-plank:    #5D3010;
+
+  /* Stone / dark panel */
+  --stone-darkest:  #120D08;
+  --stone-dark:     #1C1510;
+  --stone-medium:   #261E14;
+  --stone-light:    #33271A;
+  --stone-border:   #4A3820;
+
+  /* Warm text */
+  --cream:          #F5E6C8;
+  --ivory:          #FFF8E8;
+  --text-muted:     #C4A87A;
+  --text-dim:       #8B7355;
+
+  /* Atmospheric */
+  --sunset-orange:  #FF6B35;
+  --amber:          #FF8C00;
+  --purple-dusk:    #6B4FA1;
+  --pink-dawn:      #E9967A;
+  --green-grass:    #4A7C3F;
+
+  /* Derived */
+  --bg-body:            #1A1208;
+  --border-gold:        rgba(255, 215, 0, 0.5);
+  --shadow-deep:        0 10px 30px rgba(0, 0, 0, 0.7);
 }
 
-/* ============================================================
-   Base Reset & Scrollbar
-   ============================================================ */
-*, *::before, *::after {
-  box-sizing: border-box;
-}
+/* ================================================================
+   Reset & Base
+   ================================================================ */
+*, *::before, *::after { box-sizing: border-box; }
 
-html {
-  scroll-behavior: smooth;
-}
+html { scroll-behavior: smooth; }
 
 body {
-  background-color: #0F1E10;
-  color: #FFF8E1;
-  font-family: "Inter", "Segoe UI", system-ui, sans-serif;
+  background-color: #1A1208;
+  font-family: var(--font-inter), "Inter", "Segoe UI", system-ui, sans-serif;
+  color: #FFFFFF;
   overflow-x: hidden;
-  min-height: 100vh;
 }
 
 /* Fantasy scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-}
-::-webkit-scrollbar-track {
-  background: #0F1E10;
-}
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #120D08; }
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #F5A623, #B8860B);
+  background: linear-gradient(180deg, #FFD700, #8B4A00);
   border-radius: 4px;
 }
 
-/* ============================================================
-   Typography
-   ============================================================ */
-.font-display {
-  font-family: "Cinzel", "Georgia", serif;
-  letter-spacing: 0.05em;
-}
+/* ================================================================
+   Typography Utilities
+   ================================================================ */
+.font-lilita   { font-family: var(--font-lilita), "Lilita One", cursive; }
+.font-cinzel   { font-family: var(--font-cinzel), "Cinzel", "Georgia", serif; }
+.font-body     { font-family: var(--font-body), "Inter", system-ui, sans-serif; }
+.font-display  { font-family: var(--font-cinzel), "Cinzel", serif; }
 
-.text-gold {
-  color: #F5A623;
-}
-
-.text-gold-light {
-  color: #FFD700;
-}
-
-.text-emerald {
-  color: #4CAF50;
-}
-
-.text-parchment {
-  color: #FFF8E1;
-}
-
-.text-muted {
-  color: #A5C8A8;
-}
-
-/* Gradient text */
+/* Gradient gold text for headings / highlights — now white per text-colour change */
 .gradient-text-gold {
-  background: linear-gradient(135deg, #FFD700 0%, #F5A623 50%, #B8860B 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #FFFFFF;
 }
 
-.gradient-text-emerald {
-  background: linear-gradient(135deg, #66BB6A 0%, #4CAF50 50%, #2D7A3A 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+/* Small caps eyebrow / label text */
+.font-eyebrow {
+  font-family: var(--font-cinzel), "Cinzel", serif;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.8);
 }
 
-/* ============================================================
-   Game-Inspired Buttons
-   ============================================================ */
-.btn-gold {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.75rem 2rem;
-  font-family: "Cinzel", "Georgia", serif;
+/* JOBREADY game-title — premium embossed golden fantasy lettering */
+.game-title {
+  font-family: var(--font-lilita), "Lilita One", cursive;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  line-height: 0.9;
+  color: var(--gold-bright);
+  text-shadow:
+    /* Thick dark outline */
+    -5px -5px 0 var(--brown-dark),
+     5px -5px 0 var(--brown-dark),
+    -5px  5px 0 var(--brown-dark),
+     5px  5px 0 var(--brown-dark),
+    -5px  0   0 var(--brown-dark),
+     5px  0   0 var(--brown-dark),
+     0   -5px 0 var(--brown-dark),
+     0    5px 0 var(--brown-dark),
+    /* Deep 3D extrusion (bottom-right) */
+     0  6px 0 var(--gold-dark),
+     0  7px 0 #B86800,
+     0  8px 0 #A45800,
+     0  9px 0 #904800,
+     0 10px 0 #7C3A00,
+     0 11px 0 #682E00,
+     0 12px 0 #562400,
+     0 13px 0 #4A1E00,
+    /* Ambient drop shadow */
+     0 20px 35px rgba(0, 0, 0, 0.8),
+     0 30px 60px rgba(0, 0, 0, 0.5);
+}
+
+/* Section display heading */
+.section-heading {
+  font-family: var(--font-cinzel), "Cinzel", serif;
   font-weight: 700;
-  font-size: 0.95rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold-primary);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7), 0 1px 0 var(--brown-dark);
+}
+
+/* Section display heading */
+.section-heading {
+  font-family: var(--font-cinzel), "Cinzel", serif;
+  font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #1A1A1A;
-  background: linear-gradient(135deg, #FFD700 0%, #F5A623 40%, #E8941A 70%, #B8860B 100%);
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: all 0.15s ease;
-  box-shadow:
-    0 4px 0 #8B6914,
-    0 6px 12px rgba(0,0,0,0.4),
-    inset 0 1px 0 rgba(255,255,255,0.3),
-    0 0 20px rgba(245,166,35,0.2);
-  outline: none;
-  text-decoration: none;
-  user-select: none;
+  color: #FFD700;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.6), 0 1px 0 #8B4A00;
 }
 
-.btn-gold:hover {
-  transform: translateY(-2px);
-  box-shadow:
-    0 6px 0 #8B6914,
-    0 10px 20px rgba(0,0,0,0.5),
-    inset 0 1px 0 rgba(255,255,255,0.3),
-    0 0 30px rgba(245,166,35,0.4);
-  background: linear-gradient(135deg, #FFDF00 0%, #F5A623 40%, #E8941A 70%, #C49A1A 100%);
-}
+/* ================================================================
+   Game Buttons — unified golden game-style button system
+   ================================================================ */
 
-.btn-gold:active {
-  transform: translateY(2px);
-  box-shadow:
-    0 2px 0 #8B6914,
-    0 2px 6px rgba(0,0,0,0.4),
-    inset 0 2px 4px rgba(0,0,0,0.2);
-}
-
-.btn-outline-gold {
+/* Primary golden game button */
+.btn-game {
   position: relative;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
-  padding: 0.75rem 2rem;
-  font-family: "Cinzel", "Georgia", serif;
-  font-weight: 600;
-  font-size: 0.9rem;
-  letter-spacing: 0.06em;
+  padding: 0.95rem 2.6rem;
+  font-family: var(--font-cinzel), "Cinzel", serif;
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #F5A623;
-  background: transparent;
-  border: 2px solid #F5A623;
-  border-radius: 6px;
+  color: #FFFFFF;
   cursor: pointer;
-  transition: all 0.2s ease;
-  box-shadow: inset 0 0 0 0 rgba(245,166,35,0), 0 0 12px rgba(245,166,35,0.1);
-  outline: none;
   text-decoration: none;
   user-select: none;
-}
+  outline: none;
+  border: none;
+  border-radius: 10px;
 
-.btn-outline-gold:hover {
-  background: rgba(245,166,35,0.1);
-  box-shadow: inset 0 0 20px rgba(245,166,35,0.1), 0 0 20px rgba(245,166,35,0.3);
-  transform: translateY(-1px);
-}
+  /* Golden-yellow to orange gradient fill */
+  background: linear-gradient(180deg,
+    var(--gold-bright) 0%,
+    var(--gold-primary) 20%,
+    var(--gold-medium) 65%,
+    var(--gold-dark) 100%
+  );
 
-.btn-outline-gold:active {
-  transform: translateY(1px);
-}
+  /* Thick dark-brown outline */
+  border: 3px solid var(--brown-dark);
 
-/* ============================================================
-   Game Cards
-   ============================================================ */
-.game-card {
-  background: linear-gradient(135deg, #1E3520 0%, #152818 100%);
-  border: 1px solid rgba(245, 166, 35, 0.2);
-  border-radius: 12px;
+  /* Bevelled 3D effect: bright upper edge, strong bottom shadow */
   box-shadow:
-    0 4px 24px rgba(0,0,0,0.4),
-    inset 0 1px 0 rgba(255,255,255,0.05);
-  transition: all 0.3s ease;
+    inset 0 2px 0 rgba(255, 255, 255, 0.6),   /* bright upper-edge highlight */
+    inset 0 1px 0 rgba(255, 215, 0, 0.45),
+    inset 0 -2px 0 rgba(0, 0, 0, 0.35),        /* bottom inner shadow */
+    0 0 0 4px var(--brown-dark),               /* dark border reinforcement */
+    0 8px 0 #3D1A00,                           /* drop shadow layer 1 */
+    0 11px 0 #2D0E00,                          /* drop shadow layer 2 */
+    0 16px 32px rgba(0, 0, 0, 0.65);           /* ambient shadow */
+
+  clip-path: polygon(
+    0 6px, 6px 0,
+    calc(100% - 6px) 0, 100% 6px,
+    100% calc(100% - 6px), calc(100% - 6px) 100%,
+    6px 100%, 0 calc(100% - 6px)
+  );
+
+  transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+}
+
+.btn-game:hover {
+  transform: translateY(-3px);
+  filter: brightness(1.15);
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.7),
+    inset 0 1px 0 rgba(255, 215, 0, 0.55),
+    inset 0 -2px 0 rgba(0, 0, 0, 0.4),
+    0 0 0 4px var(--brown-dark),
+    0 12px 0 #3D1A00,
+    0 15px 0 #2D0E00,
+    0 20px 40px rgba(0, 0, 0, 0.7),
+    0 0 35px rgba(255, 180, 0, 0.3);
+}
+
+.btn-game:active {
+  transform: translateY(3px);
+  filter: brightness(0.92);
+  box-shadow:
+    inset 0 2px 5px rgba(0, 0, 0, 0.35),
+    0 0 0 4px var(--brown-dark),
+    0 4px 0 #3D1A00,
+    0 8px 16px rgba(0, 0, 0, 0.5);
+}
+
+/* Outline / secondary game button */
+.btn-game-outline {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.9rem 2.4rem;
+  font-family: var(--font-cinzel), "Cinzel", serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  background: rgba(30, 18, 4, 0.65);
+  border: 3px solid var(--gold-dark);
+  border-radius: 10px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  box-shadow:
+    0 0 0 1px rgba(200, 122, 0, 0.4),
+    0 8px 20px rgba(0, 0, 0, 0.5);
+  clip-path: polygon(
+    0 6px, 6px 0,
+    calc(100% - 6px) 0, 100% 6px,
+    100% calc(100% - 6px), calc(100% - 6px) 100%,
+    6px 100%, 0 calc(100% - 6px)
+  );
+}
+
+.btn-game-outline:hover {
+  background: rgba(200, 122, 0, 0.18);
+  border-color: var(--gold-primary);
+  transform: translateY(-2px);
+  box-shadow: 0 0 30px rgba(255, 180, 0, 0.35), 0 10px 24px rgba(0, 0, 0, 0.55);
+}
+
+.btn-game-outline:active {
+  transform: translateY(2px);
+}
+
+/* ================================================================
+   Game Panels — stone / wood texture feel with physical depth
+   ================================================================ */
+.game-panel {
+  background: linear-gradient(145deg, var(--stone-dark) 0%, var(--stone-medium) 50%, var(--stone-dark) 100%);
+  border: 2px solid var(--border-gold);
+  border-radius: 10px;
+  box-shadow:
+    0 8px 28px rgba(0, 0, 0, 0.7),
+    inset 0 1px 0 rgba(255, 215, 0, 0.15),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.35);
   position: relative;
   overflow: hidden;
 }
 
-.game-card::before {
+.game-panel::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(245,166,35,0.5), transparent);
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.6), transparent);
 }
 
-.game-card:hover {
-  border-color: rgba(245, 166, 35, 0.5);
+.game-panel:hover {
+  border-color: rgba(255, 215, 0, 0.8);
   box-shadow:
-    0 8px 32px rgba(0,0,0,0.5),
-    0 0 24px rgba(245, 166, 35, 0.1),
-    inset 0 1px 0 rgba(255,255,255,0.08);
-  transform: translateY(-4px);
+    0 12px 40px rgba(0, 0, 0, 0.75),
+    0 0 24px rgba(200, 160, 40, 0.15),
+    inset 0 1px 0 rgba(255, 215, 0, 0.2);
+  transform: translateY(-3px);
+  transition: all 0.3s ease;
 }
 
-/* ============================================================
+/* Wooden banner for section titles */
+.wood-banner {
+  display: inline-block;
+  background: linear-gradient(180deg,
+    #7A4520 0%,
+    #5D3010 25%,
+    #4A2508 50%,
+    #5D3010 75%,
+    #7A4520 100%
+  );
+  border: 2px solid #C4901A;
+  border-radius: 6px;
+  padding: 0.55rem 2.2rem;
+  box-shadow:
+    0 5px 14px rgba(0, 0, 0, 0.75),
+    inset 0 1px 0 rgba(255, 200, 80, 0.4),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.45);
+  color: var(--gold-primary);
+  font-family: var(--font-cinzel), "Cinzel", serif;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.85), 0 1px 0 #5D2500;
+  position: relative;
+}
+
+.wood-banner::before,
+.wood-banner::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #C4901A);
+}
+.wood-banner::before { right: 100%; margin-right: 8px; }
+.wood-banner::after  { left: 100%; margin-left: 8px; background: linear-gradient(270deg, transparent, #C4901A); }
+
+/* ================================================================
+   Info Panels (hero bottom strip) — game-interface panels
+   ================================================================ */
+.info-panel {
+  background: linear-gradient(145deg, var(--stone-dark) 0%, var(--stone-medium) 50%, var(--stone-dark) 100%);
+  border: 2px solid var(--border-gold);
+  border-radius: 10px;
+  box-shadow:
+    0 6px 22px rgba(0, 0, 0, 0.7),
+    inset 0 1px 0 rgba(255, 215, 0, 0.12),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.3);
+  transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+.info-panel:hover {
+  border-color: rgba(255, 215, 0, 0.85);
+  transform: translateY(-2px);
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.75),
+    0 0 20px rgba(255, 215, 0, 0.15),
+    inset 0 1px 0 rgba(255, 215, 0, 0.18);
+}
+
+/* Golden icon circle used inside info panels */
+.info-panel-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background: linear-gradient(135deg, rgba(200, 130, 0, 0.35), rgba(100, 60, 0, 0.4));
+  border: 2px solid var(--border-gold);
+  box-shadow: 0 0 16px rgba(200, 130, 0, 0.35), inset 0 1px 0 rgba(255, 215, 0, 0.3);
+}
+
+/* ================================================================
    Section Backgrounds
-   ============================================================ */
-.section-bg-forest {
-  background: linear-gradient(180deg, #0F1E10 0%, #1B2E1D 100%);
+   ================================================================ */
+.section-dark {
+  background: linear-gradient(180deg, #1A1208 0%, #1E1510 100%);
+}
+.section-darker {
+  background: linear-gradient(180deg, #140E06 0%, #1A1208 100%);
+}
+.section-stone {
+  background: linear-gradient(180deg, var(--stone-dark) 0%, var(--stone-medium) 50%, var(--stone-dark) 100%);
 }
 
+/* Section backgrounds used by home sections (kept stone/brown — no dark green dominance) */
+.section-bg-stone {
+  background: linear-gradient(180deg, var(--stone-dark) 0%, var(--stone-medium) 40%, var(--stone-dark) 100%);
+}
 .section-bg-emerald {
-  background: linear-gradient(180deg, #152818 0%, #1B3D20 100%);
+  background: linear-gradient(180deg, var(--stone-dark) 0%, #262418 40%, var(--stone-dark) 100%);
+}
+.section-bg-forest {
+  background: linear-gradient(180deg, var(--stone-dark) 0%, #262418 40%, var(--stone-dark) 100%);
 }
 
-.section-divider {
+/* Gold divider line */
+.gold-divider {
   width: 100%;
   height: 2px;
-  background: linear-gradient(90deg, transparent, rgba(245,166,35,0.5), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255, 180, 0, 0.6), rgba(255, 215, 0, 0.8), rgba(255, 180, 0, 0.6), transparent);
   margin: 0;
 }
 
-/* ============================================================
-   Gold border / glow utilities
-   ============================================================ */
-.border-gold {
-  border: 1px solid rgba(245, 166, 35, 0.35);
+/* ================================================================
+   Round Cards
+   ================================================================ */
+.round-card {
+  background: linear-gradient(145deg, #1C1510 0%, #28200F 100%);
+  border: 2px solid rgba(200,160,40,0.4);
+  border-radius: 12px;
+  box-shadow: 0 6px 28px rgba(0,0,0,0.65), inset 0 1px 0 rgba(255,215,0,0.1);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+.round-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+}
+.round-card-1::before { background: linear-gradient(90deg, transparent, #4CAF50, transparent); }
+.round-card-2::before { background: linear-gradient(90deg, transparent, #42A5F5, transparent); }
+.round-card-3::before { background: linear-gradient(90deg, transparent, #FFD700, transparent); }
+
+.round-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.75), 0 0 24px rgba(200,160,40,0.1);
+  border-color: rgba(255,215,0,0.6);
 }
 
-.glow-gold {
-  box-shadow: var(--gold-glow);
+/* ================================================================
+   Timeline
+   ================================================================ */
+.timeline-dot {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 3px solid #C87A00;
+  background: linear-gradient(135deg, #3D1A00, #6B3A1F);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 0 20px rgba(200,122,0,0.4), 0 4px 12px rgba(0,0,0,0.5);
 }
 
-.glow-emerald {
-  box-shadow: var(--emerald-glow);
+/* ================================================================
+   FAQ Accordion
+   ================================================================ */
+.faq-item {
+  background: linear-gradient(145deg, #1C1510 0%, #241C12 100%);
+  border: 1.5px solid rgba(200,160,40,0.35);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+.faq-item.open {
+  border-color: rgba(255,215,0,0.55);
 }
 
-/* ============================================================
-   Animated Particles Background
-   ============================================================ */
-@keyframes float-particle {
-  0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.6; }
-  33% { transform: translateY(-20px) rotate(120deg); opacity: 1; }
-  66% { transform: translateY(10px) rotate(240deg); opacity: 0.8; }
+/* ================================================================
+   Animations
+   ================================================================ */
+@keyframes float-up {
+  0%   { opacity: 0; transform: translateY(30px); }
+  100% { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes glow-pulse {
-  0%, 100% { opacity: 0.4; }
-  50% { opacity: 1; }
-}
-
-@keyframes shimmer {
-  0% { background-position: -200% center; }
-  100% { background-position: 200% center; }
-}
-
-.shimmer {
-  background: linear-gradient(90deg, #FFD700 25%, #FFFACD 50%, #FFD700 75%);
-  background-size: 200% auto;
-  animation: shimmer 2s linear infinite;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-/* ============================================================
-   Countdown display
-   ============================================================ */
-.countdown-box {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 0.75rem 1.25rem;
-  background: rgba(15, 30, 16, 0.8);
-  border: 1px solid rgba(245, 166, 35, 0.4);
-  border-radius: 8px;
-  min-width: 80px;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.05);
-}
-
-.countdown-number {
-  font-family: "Cinzel", "Georgia", serif;
-  font-size: 2.5rem;
-  font-weight: 700;
-  line-height: 1;
-  background: linear-gradient(135deg, #FFD700, #F5A623);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.countdown-label {
-  font-size: 0.65rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: #A5C8A8;
-  margin-top: 0.25rem;
-}
-
-/* ============================================================
-   Reduced motion
-   ============================================================ */
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
+  0%, 100% { text-shadow: inherit; }
+  50% {
+    text-shadow:
+      -3px -3px 0 #2D0E00, 3px -3px 0 #2D0E00,
+      -3px 3px 0 #2D0E00,  3px 3px 0 #2D0E00,
+      0 4px 0 #CC7800, 0 5px 0 #B86800, 0 6px 0 #A45800,
+      0 7px 0 #904800, 0 8px 0 #7C3A00, 0 9px 0 #682E00, 0 10px 0 #562400,
+      0 15px 35px rgba(255,180,0,0.4),
+      0 20px 55px rgba(0,0,0,0.55);
   }
 }
 
-/* ============================================================
-   Leaderboard
-   ============================================================ */
-.leaderboard-row {
-  background: rgba(15, 30, 16, 0.6);
-  border: 1px solid rgba(45, 90, 48, 0.4);
-  border-radius: 8px;
-  transition: all 0.2s ease;
+.animate-float-up {
+  animation: float-up 0.7s ease forwards;
 }
 
-.leaderboard-row:hover {
-  background: rgba(30, 53, 32, 0.8);
-  border-color: rgba(245, 166, 35, 0.3);
+.animate-glow {
+  animation: glow-pulse 3s ease-in-out infinite;
 }
 
-.rank-gold { color: #FFD700; }
-.rank-silver { color: #C0C0C0; }
-.rank-bronze { color: #CD7F32; }
-
-/* ============================================================
-   Form elements
-   ============================================================ */
-.game-input {
-  width: 100%;
-  padding: 0.75rem 1rem;
-  background: rgba(15, 30, 16, 0.8);
-  border: 1px solid rgba(45, 90, 48, 0.6);
-  border-radius: 8px;
-  color: #FFF8E1;
-  font-size: 0.95rem;
-  transition: border-color 0.2s, box-shadow 0.2s;
-  outline: none;
-}
-
-.game-input:focus {
-  border-color: rgba(245, 166, 35, 0.6);
-  box-shadow: 0 0 0 3px rgba(245, 166, 35, 0.1);
-}
-
-.game-input::placeholder {
-  color: #6B8F6E;
-}
-
-/* ============================================================
-   Badge / tag
-   ============================================================ */
+/* ================================================================
+   Badge / Tag
+   ================================================================ */
 .badge-gold {
   display: inline-flex;
   align-items: center;
-  gap: 0.25rem;
-  padding: 0.2rem 0.7rem;
-  background: rgba(245, 166, 35, 0.15);
-  border: 1px solid rgba(245, 166, 35, 0.4);
+  gap: 6px;
+  padding: 4px 14px;
+  background: rgba(200,122,0,0.15);
+  border: 1px solid rgba(200,122,0,0.5);
   border-radius: 99px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.05em;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: #F5A623;
+  color: #FFFFFF;
 }
 
-.badge-emerald {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.25rem;
-  padding: 0.2rem 0.7rem;
-  background: rgba(76, 175, 80, 0.15);
-  border: 1px solid rgba(76, 175, 80, 0.4);
-  border-radius: 99px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  color: #66BB6A;
-}
-
-/* ============================================================
-   Timeline
-   ============================================================ */
-.timeline-line {
-  background: linear-gradient(180deg, #F5A623, #2D7A3A, #1A237E);
+/* ================================================================
+   Reduced motion
+   ================================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }

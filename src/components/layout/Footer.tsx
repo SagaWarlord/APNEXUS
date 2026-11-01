@@ -45,15 +45,15 @@ export default function Footer() {
                 <Shield className="w-6 h-6 text-[#1A1A1A] fill-[#1A1A1A]" />
               </div>
               <div>
-                <div className="font-display text-xl font-bold text-[#FFD700]">JOBREADY</div>
-                <div className="text-[0.6rem] text-[#6B8F6E] tracking-[0.2em] uppercase">A Tech Event</div>
+                <div className="font-display text-xl font-bold text-white">JOBREADY</div>
+                <div className="text-[0.6rem] text-white tracking-[0.2em] uppercase">A Tech Event</div>
               </div>
             </div>
-            <p className="text-[#A5C8A8] text-sm leading-relaxed mb-6 max-w-sm">
+            <p className="text-white text-sm leading-relaxed mb-6 max-w-sm">
               BUILD YOUR BASE. CONQUER THE CODE. A three-round website development challenge
               where creativity meets engineering.
             </p>
-            <div className="flex flex-col gap-2 text-sm text-[#6B8F6E]">
+            <div className="flex flex-col gap-2 text-sm text-white">
               <div className="flex items-center gap-2">
                 <Calendar className="w-4 h-4 text-[#F5A623]" />
                 <span>{EVENT.dateLabel}</span>
@@ -67,7 +67,7 @@ export default function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h3 className="font-display text-sm font-bold text-[#F5A623] tracking-wider uppercase mb-4">
+            <h3 className="font-display text-sm font-bold text-white tracking-wider uppercase mb-4">
               Navigation
             </h3>
             <ul className="flex flex-col gap-2">
@@ -75,19 +75,19 @@ export default function Footer() {
                 <li key={link.href}>
                   <a
                     href={link.href}
-                    className="text-[#A5C8A8] text-sm hover:text-[#FFD700] transition-colors"
+                    className="text-white text-sm hover:text-white transition-colors"
                   >
                     {link.label}
                   </a>
                 </li>
               ))}
               <li>
-                <Link href="/register" className="text-[#A5C8A8] text-sm hover:text-[#FFD700] transition-colors">
+                <Link href="/register" className="text-white text-sm hover:text-white transition-colors">
                   Register
                 </Link>
               </li>
               <li>
-                <Link href="/login" className="text-[#A5C8A8] text-sm hover:text-[#FFD700] transition-colors">
+                <Link href="/login" className="text-white text-sm hover:text-white transition-colors">
                   Login
                 </Link>
               </li>
@@ -96,17 +96,17 @@ export default function Footer() {
 
           {/* Contact */}
           <div>
-            <h3 className="font-display text-sm font-bold text-[#F5A623] tracking-wider uppercase mb-4">
+            <h3 className="font-display text-sm font-bold text-white tracking-wider uppercase mb-4">
               Contact
             </h3>
-            <div className="flex flex-col gap-3 text-sm text-[#A5C8A8]">
+            <div className="flex flex-col gap-3 text-sm text-white">
               <div className="flex items-start gap-2">
                 <Mail className="w-4 h-4 mt-0.5 text-[#F5A623] flex-shrink-0" />
-                <span className="italic opacity-70">[Contact email — to be confirmed]</span>
+                <span className="italic text-white opacity-70">[Contact email — to be confirmed]</span>
               </div>
               <div className="flex items-start gap-2">
                 <MapPin className="w-4 h-4 mt-0.5 text-[#F5A623] flex-shrink-0" />
-                <span className="text-xs leading-relaxed">{EVENT.venueFull}</span>
+                <span className="text-xs text-white leading-relaxed">{EVENT.venueFull}</span>
               </div>
             </div>
 
@@ -123,7 +123,7 @@ export default function Footer() {
                   href="#"
                   aria-label={label}
                   title={`${label} — coming soon`}
-                  className="w-9 h-9 flex items-center justify-center rounded-lg border border-[rgba(245,166,35,0.2)] text-[#6B8F6E] hover:text-[#F5A623] hover:border-[rgba(245,166,35,0.5)] transition-all hover:bg-[rgba(245,166,35,0.05)]"
+                  className="w-9 h-9 flex items-center justify-center rounded-lg border border-[rgba(245,166,35,0.2)] text-white hover:text-white hover:border-[rgba(245,166,35,0.5)] transition-all hover:bg-[rgba(245,166,35,0.05)]"
                 >
                   <Icon />
                 </a>
@@ -133,7 +133,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="mt-12 pt-6 border-t border-[rgba(45,90,48,0.3)] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#6B8F6E]">
+        <div className="mt-12 pt-6 border-t border-[rgba(45,90,48,0.3)] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white">
           <p>© {CURRENT_YEAR} JOBREADY. All rights reserved. MMMUT, Gorakhpur.</p>
           <p className="italic">
             JobReady is an independent student tech event. Not affiliated with or endorsed by Supercell.

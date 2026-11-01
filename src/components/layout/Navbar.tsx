@@ -1,96 +1,124 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
-import Link from "next/link";
-import { Menu, X, Shield } from "lucide-react";
-import { cn } from "@/lib/utils";
-import { NAV_LINKS } from "@/lib/constants";
+import { useState, useEffect } from "react";
+import { Home, Trophy, Code2, Gift, Users, HelpCircle, Menu, X, Crown } from "lucide-react";
+
+const NAV_ITEMS = [
+  { label: "Home",     href: "#home",     icon: Home },
+  { label: "About",   href: "#about",    icon: Trophy },
+  { label: "Rules",   href: "#rounds",   icon: Code2 },
+  { label: "Prizes",  href: "#prizes",   icon: Gift },
+  { label: "Register",href: "#register", icon: Users },
+  { label: "FAQ",     href: "#faq",      icon: HelpCircle },
+];
 
 export default function Navbar() {
-  const [isScrolled, setIsScrolled] = useState(false);
+  const [scrolled, setScrolled]   = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const menuRef = useRef<HTMLDivElement>(null);
+  const [active, setActive]       = useState("home");
 
   useEffect(() => {
-    const onScroll = () => setIsScrolled(window.scrollY > 40);
+    const onScroll = () => setScrolled(window.scrollY > 30);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Close mobile menu on outside click
-  useEffect(() => {
-    if (!mobileOpen) return;
-    const handler = (e: MouseEvent) => {
-      if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
-        setMobileOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handler);
-    return () => document.removeEventListener("mousedown", handler);
-  }, [mobileOpen]);
-
-  const handleNavClick = (href: string) => {
+  const scrollTo = (href: string) => {
     setMobileOpen(false);
-    if (href.startsWith("#")) {
-      const el = document.querySelector(href);
-      el?.scrollIntoView({ behavior: "smooth" });
-    }
+    const id = href.replace("#", "");
+    setActive(id);
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
     <>
       <nav
-        className={cn(
-          "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-          isScrolled
-            ? "bg-[#0F1E10]/95 backdrop-blur-md border-b border-[rgba(245,166,35,0.2)] shadow-lg"
-            : "bg-transparent"
-        )}
+        className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
+        style={{
+          background: scrolled
+            ? "rgba(18, 12, 6, 0.92)"
+            : "rgba(10, 6, 2, 0.75)",
+          backdropFilter: scrolled ? "blur(16px)" : "blur(8px)",
+          borderBottom: `1px solid ${`rgba(255, 215, 0, ${scrolled ? 0.45 : 0.25})`}`,
+          boxShadow: scrolled ? "0 4px 24px rgba(0, 0, 0, 0.6)" : "none",
+        }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16 lg:h-20">
-            {/* Logo */}
-            <Link href="/" className="flex items-center gap-2.5 group" aria-label="JobReady Home">
-              <div className="relative w-10 h-10 flex items-center justify-center">
-                <div className="absolute inset-0 bg-gradient-to-br from-[#FFD700] to-[#B8860B] rounded-lg shadow-lg group-hover:shadow-[0_0_16px_rgba(245,166,35,0.5)] transition-shadow" />
-                <Shield className="relative w-6 h-6 text-[#1A1A1A] fill-[#1A1A1A]" />
+          <div className="flex items-center justify-between h-16 lg:h-[72px]">
+
+            {/* ── Logo ── */}
+            <button onClick={() => scrollTo("#home")} className="flex items-center gap-3 group cursor-pointer shrink-0">
+              <div className="relative w-11 h-11 flex items-center justify-center">
+                <div
+                  className="absolute inset-0 rounded-xl"
+                  style={{
+                    background: "linear-gradient(135deg, var(--gold-bright), var(--gold-medium), var(--gold-dark))",
+                    boxShadow: "0 0 0 2px var(--brown-dark), 0 6px 18px rgba(0,0,0,0.6), 0 0 24px rgba(255,180,0,0.35)",
+                  }}
+                />
+                <Crown className="relative w-7 h-7 text-[#2D0E00]" style={{ filter: "drop-shadow(0 1px 3px rgba(0,0,0,0.6))" }} />
               </div>
               <div className="flex flex-col leading-none">
-                <span className="font-display text-xl font-bold text-[#FFD700] tracking-wide">JOBREADY</span>
-                <span className="text-[0.55rem] text-[#A5C8A8] tracking-[0.2em] uppercase">A Tech Event</span>
-              </div>
-            </Link>
-
-            {/* Desktop Nav */}
-            <div className="hidden lg:flex items-center gap-1">
-              {NAV_LINKS.map((link) => (
-                <button
-                  key={link.href}
-                  onClick={() => handleNavClick(link.href)}
-                  className="px-4 py-2 text-sm font-medium text-[#A5C8A8] hover:text-[#FFD700] rounded-md hover:bg-[rgba(245,166,35,0.08)] transition-all duration-150 cursor-pointer tracking-wide"
+                <span
+                  className="font-lilita text-xl sm:text-2xl font-normal leading-none"
+                  style={{
+                    color: "#FFFFFF",
+                    textShadow: "-2px -2px 0 var(--brown-dark), 2px -2px 0 var(--brown-dark), -2px 2px 0 var(--brown-dark), 2px 2px 0 var(--brown-dark), 0 2px 0 var(--brown-dark), 0 -2px 0 var(--brown-dark), 0 4px 10px rgba(0,0,0,0.7)",
+                    letterSpacing: "0.06em",
+                  }}
                 >
-                  {link.label}
-                </button>
-              ))}
+                  JOBREADY
+                </span>
+                <span
+                  className="text-[0.55rem] tracking-[0.3em] uppercase font-cinzel font-semibold"
+                  style={{ color: "#FFFFFF", textShadow: "0 1px 4px rgba(0,0,0,0.7)" }}
+                >
+                  A Tech Event
+                </span>
+              </div>
+            </button>
+
+            {/* ── Desktop Nav ── */}
+            <div className="hidden lg:flex items-center gap-6">
+              {NAV_ITEMS.map(({ label, href, icon: Icon }) => {
+                const isActive = active === href.replace("#", "");
+                return (
+                  <button
+                    key={href}
+                    onClick={() => scrollTo(href)}
+                    className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-left cursor-pointer transition-all group relative"
+                    style={{
+                      color: "#FFFFFF",
+                      border: isActive ? `1px solid var(--border-gold)` : "transparent",
+                      background: isActive ? "rgba(255, 215, 0, 0.08)" : "transparent",
+                    }}
+                  >
+                    <Icon className="w-5 h-5" style={{ color: isActive ? "var(--gold-primary)" : "var(--text-dim)" }} />
+                    <span className="text-sm font-medium tracking-wide font-cinzel transition-colors group-hover:text-white">
+                      {label}
+                    </span>
+                  </button>
+                );
+              })}
             </div>
 
-            {/* Auth buttons */}
-            <div className="hidden lg:flex items-center gap-3">
-              <Link
-                href="/login"
-                className="px-4 py-2 text-sm font-medium text-[#F5A623] border border-[rgba(245,166,35,0.4)] rounded-md hover:bg-[rgba(245,166,35,0.1)] transition-all duration-150 tracking-wide"
-              >
-                Login
-              </Link>
-              <Link href="/register" className="btn-gold text-sm px-5 py-2.5">
-                Register Now →
-              </Link>
+            {/* ── Register Now CTA ── */}
+            <div className="hidden lg:block">
+              <button onClick={() => scrollTo("#register")} className="btn-game text-sm px-7 py-3">
+                Register Now &nbsp;›
+              </button>
             </div>
 
-            {/* Mobile menu toggle */}
+            {/* ── Mobile toggle ── */}
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="lg:hidden p-2 text-[#F5A623] hover:bg-[rgba(245,166,35,0.1)] rounded-md transition-colors"
+              className="lg:hidden p-2.5 rounded-xl transition-colors shrink-0"
+              style={{
+                color: "var(--gold-primary)",
+                background: mobileOpen ? "rgba(200, 130, 0, 0.15)" : "transparent",
+                border: `1px solid ${mobileOpen ? "var(--border-gold)" : "transparent"}`,
+              }}
               aria-label={mobileOpen ? "Close menu" : "Open menu"}
             >
               {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -99,53 +127,60 @@ export default function Navbar() {
         </div>
       </nav>
 
-      {/* Mobile Drawer */}
+      {/* ── Mobile Drawer ── */}
       <div
-        ref={menuRef}
-        className={cn(
-          "fixed inset-x-0 top-0 z-40 transition-transform duration-300 lg:hidden",
-          mobileOpen ? "translate-y-0" : "-translate-y-full"
-        )}
+        className="fixed inset-x-0 top-0 z-40 transition-all duration-300 lg:hidden"
+        style={{
+          transform: mobileOpen ? "translateY(0)" : "translateY(-100%)",
+          background: "linear-gradient(180deg, rgba(18, 12, 6, 0.97) 0%, rgba(26, 18, 8, 0.95) 100%)",
+          backdropFilter: "blur(20px)",
+          borderBottom: "2px solid var(--border-gold)",
+          boxShadow: "0 8px 32px rgba(0, 0, 0, 0.8)",
+        }}
       >
-        <div className="bg-[#0F1E10]/98 backdrop-blur-xl border-b border-[rgba(245,166,35,0.2)] pt-20 pb-6 px-4 shadow-2xl">
-          <div className="flex flex-col gap-1 mb-6">
-            {NAV_LINKS.map((link) => (
-              <button
-                key={link.href}
-                onClick={() => handleNavClick(link.href)}
-                className="w-full text-left px-4 py-3 text-base font-medium text-[#A5C8A8] hover:text-[#FFD700] hover:bg-[rgba(245,166,35,0.08)] rounded-lg transition-all cursor-pointer tracking-wide"
-              >
-                {link.label}
-              </button>
-            ))}
+        <div className="pt-[72px] pb-8 px-6">
+          <div className="flex flex-col gap-1.5 mb-6">
+            {NAV_ITEMS.map(({ label, href, icon: Icon }) => {
+              const isActive = active === href.replace("#", "");
+              return (
+                <button
+                  key={href}
+                  onClick={() => scrollTo(href)}
+                  className="flex items-center gap-3.5 w-full px-5 py-3.5 rounded-xl text-left cursor-pointer transition-all group"
+                  style={{
+                    color: "#FFFFFF",
+                    background: isActive ? "rgba(255, 215, 0, 0.1)" : "transparent",
+                    border: isActive ? `1px solid var(--border-gold)` : "transparent",
+                  }}
+                  onMouseEnter={e => {
+                    (e.currentTarget as HTMLElement).style.background = "rgba(200, 130, 0, 0.12)";
+                    (e.currentTarget as HTMLElement).style.color = "#FFFFFF";
+                  }}
+                  onMouseLeave={e => {
+                    (e.currentTarget as HTMLElement).style.background = isActive ? "rgba(255, 215, 0, 0.1)" : "transparent";
+                    (e.currentTarget as HTMLElement).style.color = "#FFFFFF";
+                  }}
+                >
+                  <Icon className="w-6 h-6" style={{ color: isActive ? "var(--gold-primary)" : "var(--text-dim)" }} />
+                  <span className="font-cinzel font-semibold tracking-wide">{label}</span>
+                </button>
+              );
+            })}
           </div>
-          <div className="flex flex-col gap-3 px-4">
-            <Link
-              href="/login"
-              onClick={() => setMobileOpen(false)}
-              className="btn-outline-gold w-full justify-center text-sm py-3"
-            >
-              Login
-            </Link>
-            <Link
-              href="/register"
-              onClick={() => setMobileOpen(false)}
-              className="btn-gold w-full justify-center text-sm py-3"
-            >
-              Register Your Team →
-            </Link>
-          </div>
+          <button onClick={() => scrollTo("#register")} className="btn-game w-full py-3.5 text-sm">
+            Register Now &nbsp;›
+          </button>
         </div>
       </div>
 
       {/* Backdrop */}
       {mobileOpen && (
         <div
-          className="fixed inset-0 z-30 bg-black/50 lg:hidden"
+          className="fixed inset-0 z-30 lg:hidden"
+          style={{ background: "rgba(0, 0, 0, 0.65)" }}
           onClick={() => setMobileOpen(false)}
         />
       )}
     </>
   );
 }
-

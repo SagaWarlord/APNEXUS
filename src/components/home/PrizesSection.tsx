@@ -63,15 +63,15 @@ export default function PrizesSection() {
         {/* Header */}
         <div className="text-center mb-16">
           <div className="badge-gold inline-flex mb-4">🏆 Rewards</div>
-          <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-black text-[#FFF8E1] mb-4">
+          <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-black text-white mb-4">
             PRIZES &{" "}
             <span className="gradient-text-gold">GLORY</span>
           </h2>
-          <p className="text-[#A5C8A8] text-base max-w-xl mx-auto">
+          <p className="text-white text-base max-w-xl mx-auto">
             Compete for recognition, trophies and special awards. Prize values will be confirmed and updated by the organisers.
           </p>
           <div className="inline-flex items-center gap-2 mt-4 px-4 py-2 bg-[rgba(245,166,35,0.08)] border border-[rgba(245,166,35,0.2)] rounded-full">
-            <span className="text-xs text-[#F5A623]">⚠ Prize details are placeholder — to be confirmed by organisers</span>
+            <span className="text-xs text-white">⚠ Prize details are placeholder — to be confirmed by organisers</span>
           </div>
         </div>
 
@@ -89,7 +89,7 @@ export default function PrizesSection() {
             >
               {featured && (
                 <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                  <span className="px-4 py-1 rounded-full text-xs font-bold tracking-wider uppercase bg-gradient-to-r from-[#FFD700] to-[#F5A623] text-[#1A1A1A]">
+                  <span className="px-4 py-1 rounded-full text-xs font-bold tracking-wider uppercase bg-gradient-to-r from-[#FFD700] to-[#F5A623] text-white">
                     ⭐ Top Prize
                   </span>
                 </div>
@@ -108,21 +108,21 @@ export default function PrizesSection() {
 
               <div
                 className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold tracking-wider uppercase mb-3"
-                style={{ color, background: bg, border: `1px solid ${border}` }}
+                style={{ color: "#FFFFFF", background: bg, border: `1px solid ${border}` }}
               >
                 {badge}
               </div>
 
-              <h3 className="font-display text-2xl font-black mb-3" style={{ color }}>
+              <h3 className="font-display text-2xl font-black mb-3" style={{ color: "#FFFFFF" }}>
                 {rank}
               </h3>
 
-              <p className="text-[#6B8F6E] text-sm italic mb-4">{desc}</p>
+              <p className="text-white text-sm italic mb-4">{desc}</p>
 
               <ul className="space-y-2 text-left">
                 {perks.map((p) => (
-                  <li key={p} className="flex items-center gap-2 text-sm text-[#A5C8A8]">
-                    <span style={{ color }}>✓</span>
+                  <li key={p} className="flex items-center gap-2 text-sm text-white">
+                    <span style={{ color: "#FFFFFF" }}>✓</span>
                     {p}
                   </li>
                 ))}
@@ -133,10 +133,10 @@ export default function PrizesSection() {
 
         {/* Sponsors */}
         <div>
-          <h3 className="text-center font-display text-2xl font-bold text-[#FFF8E1] mb-2">
+          <h3 className="text-center font-display text-2xl font-bold text-white mb-2">
             SPONSORS & <span className="gradient-text-gold">PARTNERS</span>
           </h3>
-          <p className="text-center text-[#6B8F6E] text-sm mb-8">
+          <p className="text-center text-white text-sm mb-8">
             [Placeholder — actual sponsors to be confirmed and updated by organisers]
           </p>
 
@@ -144,10 +144,10 @@ export default function PrizesSection() {
             {SPONSORS.map(({ tier, name }) => (
               <div key={tier} className="game-card p-6 text-center">
                 <div className="w-20 h-12 mx-auto mb-3 rounded-lg bg-[rgba(245,166,35,0.08)] border border-[rgba(245,166,35,0.2)] flex items-center justify-center">
-                  <span className="text-xs text-[#6B8F6E] italic">Logo</span>
+                  <span className="text-xs text-white italic">Logo</span>
                 </div>
-                <p className="text-[#F5A623] font-bold text-xs tracking-widest uppercase mb-1">{tier}</p>
-                <p className="text-[#6B8F6E] text-sm italic">{name}</p>
+                <p className="text-white font-bold text-xs tracking-widest uppercase mb-1">{tier}</p>
+                <p className="text-white text-sm italic">{name}</p>
               </div>
             ))}
           </div>
