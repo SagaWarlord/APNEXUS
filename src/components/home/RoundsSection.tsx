@@ -2,157 +2,173 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { ROUNDS } from "@/lib/constants";
-import { Clock, Calendar, Upload, Award, ChevronDown } from "lucide-react";
+import { Clock, Upload, Award, ChevronDown } from "lucide-react";
 
-const ROUND_ICONS = ["🎨", "⚙️", "🏆"];
-const ROUND_COLORS = {
-  emerald: { border: "#4CAF50", bg: "#4CAF5018", text: "#66BB6A", glow: "rgba(76,175,80,0.2)" },
-  blue: { border: "#42A5F5", bg: "#42A5F518", text: "#64B5F6", glow: "rgba(66,165,245,0.2)" },
-  gold: { border: "#FFD700", bg: "#FFD70018", text: "#FFD700", glow: "rgba(255,215,0,0.2)" },
-};
+const ROUNDS = [
+  {
+    id: 1,
+    label: "Round 01",
+    name: "FRONTEND BATTLE",
+    time: "9 AM – 12 PM",
+    icon: "🎨",
+    colorClass: "round-card-1",
+    accentColor: "#4CAF50",
+    bgAccent: "rgba(76,175,80,0.08)",
+    description: "Build the foundation. Create a visually engaging, responsive and interactive frontend website that showcases your creativity and design skills.",
+    submission: "Live frontend website URL",
+    criteria: ["UI/UX Design", "Visual Creativity", "Responsiveness", "Frontend Functionality"],
+  },
+  {
+    id: 2,
+    label: "Round 02",
+    name: "FULL-STACK BATTLE",
+    time: "12 PM – 6 PM",
+    icon: "⚙️",
+    colorClass: "round-card-2",
+    accentColor: "#F5A623",
+    bgAccent: "rgba(245,166,35,0.08)",
+    description: "Bring your project to life. Extend your frontend with backend functionality, databases, APIs and all required features to make a complete working product.",
+    submission: "Final website URL · GitHub URL · PPT/PDF",
+    criteria: ["Backend Implementation", "Database Integration", "API Design", "Product Completeness"],
+  },
+  {
+    id: 3,
+    label: "Round 03",
+    name: "FINAL BATTLE",
+    time: "6 PM – 9 PM",
+    icon: "🏆",
+    colorClass: "round-card-3",
+    accentColor: "#FFD700",
+    bgAccent: "rgba(255,215,0,0.08)",
+    description: "The ultimate showdown. Physically present your complete project at MMMUT, Gorakhpur. Demonstrate features, explain your architecture and answer judges' questions.",
+    submission: "Physical presentation at MMMUT",
+    criteria: ["Live Demonstration", "Technical Understanding", "Innovation", "Presentation Quality"],
+  },
+];
 
 export default function RoundsSection() {
   const [expanded, setExpanded] = useState<number | null>(null);
 
   return (
-    <section id="rounds" className="relative py-24 section-bg-emerald overflow-hidden">
-      <div className="section-divider absolute top-0 left-0 right-0" />
+    <section id="rounds" className="relative py-20 section-dark overflow-hidden">
+      <div className="gold-divider absolute top-0 left-0 right-0" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Background glow */}
+      <div className="absolute inset-0 pointer-events-none"
+        style={{ background: "radial-gradient(ellipse at 50% 0%, rgba(200,122,0,0.06) 0%, transparent 60%)" }} />
+
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-16">
-          <div className="badge-emerald inline-flex mb-4">⚔ Competition Structure</div>
-          <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-black text-white mb-4">
-            THE THREE{" "}
-            <span className="gradient-text-gold">ROUNDS</span>
-          </h2>
-          <p className="text-white text-lg max-w-xl mx-auto">
-            Three epic challenges. One glorious day. Build, forge and conquer.
+        <div className="text-center mb-14">
+          <div className="wood-banner text-base sm:text-lg mb-2">Competition Rounds</div>
+          <p className="text-sm sm:text-base mt-6" style={{ color: "#9B7A40" }}>
+            Three epic battles — one extraordinary day.
           </p>
         </div>
 
         {/* Round cards */}
-        <div className="space-y-6">
-          {ROUNDS.map((round, i) => {
-            const colors = ROUND_COLORS[round.color as keyof typeof ROUND_COLORS];
-            const isExpanded = expanded === round.id;
-
+        <div className="space-y-5">
+          {ROUNDS.map((round) => {
+            const isOpen = expanded === round.id;
             return (
               <div
                 key={round.id}
-                className="game-card overflow-hidden cursor-pointer group"
-                style={{ borderColor: isExpanded ? colors.border : "rgba(245,166,35,0.15)" }}
-                onClick={() => setExpanded(isExpanded ? null : round.id)}
+                className={`round-card ${round.colorClass} cursor-pointer`}
+                style={{ borderColor: isOpen ? round.accentColor + "80" : "rgba(200,160,40,0.3)" }}
+                onClick={() => setExpanded(isOpen ? null : round.id)}
               >
-                {/* Card header */}
-                <div className="p-6 sm:p-8">
-                  <div className="flex items-start gap-6">
-                    {/* Round icon */}
-                    <div
-                      className="w-16 h-16 sm:w-20 sm:h-20 flex-shrink-0 rounded-xl flex items-center justify-center text-3xl sm:text-4xl border-2 transition-all"
-                      style={{
-                        borderColor: colors.border,
-                        background: colors.bg,
-                        boxShadow: isExpanded ? `0 0 20px ${colors.glow}` : "none",
-                      }}
-                    >
-                      {ROUND_ICONS[i]}
-                    </div>
-
-                    {/* Content */}
-                    <div className="flex-1 min-w-0">
-                      <div className="flex flex-wrap items-start justify-between gap-4 mb-3">
-                        <div>
-                          <span
-                            className="text-xs font-bold tracking-[0.2em] uppercase"
-                            style={{ color: "#FFFFFF" }}
-                          >
-                            {round.label}
-                          </span>
-                          <h3 className="font-display text-2xl sm:text-3xl font-black text-white mt-0.5">
-                            {round.name}
-                          </h3>
-                        </div>
-                        <div className="flex flex-col gap-1 text-right">
-                          <div className="flex items-center gap-1.5 text-sm text-white">
-                            <Clock className="w-4 h-4 text-[#F5A623]" />
-                            <span>{round.startTime} – {round.endTime}</span>
-                          </div>
-                          <div className="flex items-center gap-1.5 text-sm text-white">
-                            <Calendar className="w-4 h-4 text-[#F5A623]" />
-                            <span>6 November 2026</span>
-                          </div>
-                        </div>
-                      </div>
-
-                      <p className="text-white text-sm sm:text-base leading-relaxed mb-4">
-                        {round.description}
-                      </p>
-
-                      <div className="flex flex-wrap gap-2 items-center">
-                        <div className="flex items-center gap-1.5 text-xs text-white">
-                          <Upload className="w-3 h-3" />
-                          <span>{round.submission}</span>
-                        </div>
-                        <button
-                          className="ml-auto flex items-center gap-1 text-xs font-semibold tracking-wide"
-                          style={{ color: "#FFFFFF" }}
-                        >
-                          {isExpanded ? "Less" : "Details"}
-                          <ChevronDown
-                            className="w-4 h-4 transition-transform"
-                            style={{ transform: isExpanded ? "rotate(180deg)" : "" }}
-                          />
-                        </button>
-                      </div>
-                    </div>
+                {/* Header row */}
+                <div className="flex items-center gap-5 p-6 sm:p-8">
+                  {/* Icon */}
+                  <div
+                    className="w-16 h-16 sm:w-20 sm:h-20 rounded-xl flex items-center justify-center text-3xl sm:text-4xl flex-shrink-0 border-2"
+                    style={{
+                      borderColor: round.accentColor + "60",
+                      background: round.bgAccent,
+                      boxShadow: isOpen ? `0 0 20px ${round.accentColor}30` : "none",
+                    }}
+                  >
+                    {round.icon}
                   </div>
+
+                  <div className="flex-1 min-w-0">
+                    <div className="flex flex-wrap items-start justify-between gap-3">
+                      <div>
+                        <p className="text-xs font-cinzel tracking-[0.2em] uppercase mb-1"
+                          style={{ color: round.accentColor }}>
+                          {round.label}
+                        </p>
+                        <h3 className="font-cinzel font-black text-xl sm:text-2xl lg:text-3xl"
+                          style={{ color: "#F5E6C8", textShadow: "0 2px 8px rgba(0,0,0,0.5)" }}>
+                          {round.name}
+                        </h3>
+                      </div>
+                      <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg"
+                        style={{ background: round.bgAccent, border: `1px solid ${round.accentColor}40` }}>
+                        <Clock className="w-4 h-4" style={{ color: round.accentColor }} />
+                        <span className="text-sm font-cinzel font-bold" style={{ color: round.accentColor }}>
+                          {round.time}
+                        </span>
+                      </div>
+                    </div>
+
+                    <p className="text-sm mt-2 leading-relaxed hidden sm:block" style={{ color: "#C4A878" }}>
+                      {round.description}
+                    </p>
+                  </div>
+
+                  <ChevronDown
+                    className="w-5 h-5 flex-shrink-0 transition-transform duration-300"
+                    style={{
+                      color: round.accentColor,
+                      transform: isOpen ? "rotate(180deg)" : "rotate(0deg)",
+                    }}
+                  />
                 </div>
 
-                {/* Expanded details */}
-                {isExpanded && (
-                  <div
-                    className="px-6 sm:px-8 pb-8 pt-0 border-t"
-                    style={{ borderColor: `${colors.border}30` }}
-                  >
-                    <div className="pt-6 grid grid-cols-1 sm:grid-cols-2 gap-6">
-                      {/* Judging criteria */}
-                      <div>
-                        <h4 className="flex items-center gap-2 font-display text-sm font-bold text-white tracking-wider uppercase mb-3">
-                          <Award className="w-4 h-4" />
-                          Judging Criteria
-                        </h4>
-                        <ul className="space-y-2">
-                          {round.criteria.map((c) => (
-                            <li key={c} className="flex items-center gap-2 text-sm text-white">
-                              <span
-                                className="w-1.5 h-1.5 rounded-full flex-shrink-0"
-                                style={{ background: colors.border }}
-                              />
-                              {c}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
+                {/* Description (mobile only visible here) */}
+                <p className="text-sm px-6 pb-4 sm:hidden leading-relaxed" style={{ color: "#C4A878" }}>
+                  {round.description}
+                </p>
 
-                      {/* Submission info */}
-                      <div>
-                        <h4 className="flex items-center gap-2 font-display text-sm font-bold text-white tracking-wider uppercase mb-3">
-                          <Upload className="w-4 h-4" />
-                          Submission
-                        </h4>
-                        <p className="text-sm text-white leading-relaxed">
-                          {round.submission}
-                        </p>
-                        {round.id === 3 && (
-                          <div className="mt-3 p-3 rounded-lg bg-[rgba(255,215,0,0.05)] border border-[rgba(255,215,0,0.2)]">
-                            <p className="text-xs text-white">
-                              📍 <span className="text-white">Venue:</span> Multi Purpose Hall, MMMUT, Gorakhpur
-                            </p>
-                          </div>
-                        )}
-                      </div>
+                {/* Expanded details */}
+                {isOpen && (
+                  <div
+                    className="px-6 sm:px-8 pb-8 border-t grid grid-cols-1 sm:grid-cols-2 gap-6 pt-6"
+                    style={{ borderColor: round.accentColor + "25" }}
+                  >
+                    {/* Criteria */}
+                    <div>
+                      <h4 className="font-cinzel text-sm font-bold tracking-wider uppercase mb-3 flex items-center gap-2"
+                        style={{ color: "#FFD700" }}>
+                        <Award className="w-4 h-4" /> Judging Criteria
+                      </h4>
+                      <ul className="space-y-2">
+                        {round.criteria.map((c) => (
+                          <li key={c} className="flex items-center gap-2 text-sm" style={{ color: "#C4A878" }}>
+                            <span className="w-1.5 h-1.5 rounded-full flex-shrink-0"
+                              style={{ background: round.accentColor }} />
+                            {c}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    {/* Submission */}
+                    <div>
+                      <h4 className="font-cinzel text-sm font-bold tracking-wider uppercase mb-3 flex items-center gap-2"
+                        style={{ color: "#FFD700" }}>
+                        <Upload className="w-4 h-4" /> Submission
+                      </h4>
+                      <p className="text-sm leading-relaxed" style={{ color: "#C4A878" }}>{round.submission}</p>
+                      {round.id === 3 && (
+                        <div className="mt-3 p-3 rounded-lg"
+                          style={{ background: "rgba(255,215,0,0.06)", border: "1px solid rgba(255,215,0,0.2)" }}>
+                          <p className="text-xs" style={{ color: "#C4A030" }}>
+                            📍 Multi Purpose Hall, MMMUT, Gorakhpur
+                          </p>
+                        </div>
+                      )}
                     </div>
                   </div>
                 )}
@@ -161,16 +177,18 @@ export default function RoundsSection() {
           })}
         </div>
 
-        {/* CTA */}
+        {/* CTA -> /register */}
         <div className="text-center mt-12">
-          <Link href="/register" className="btn-gold">
-            ⚔ Register Your Team Now
+          <Link
+            href="/register"
+            className="btn-game text-sm px-8 py-3 inline-block"
+          >
+            ⚔ Register for the Battle
           </Link>
         </div>
       </div>
 
-      <div className="section-divider absolute bottom-0 left-0 right-0" />
+      <div className="gold-divider absolute bottom-0 left-0 right-0" />
     </section>
   );
 }
-

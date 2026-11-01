@@ -280,15 +280,28 @@ body {
    ================================================================ */
 @font-face {
   font-family: "You Blockhead";
-  src: url("/assets/fonts/you-blockhead.otf") format("opentype");
+  src: url("/fonts/YouBlockheadOpen.ttf") format("truetype"),
+       url("/fonts/YouBlockhead.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
+  font-display: swap;
 }
 
-/* Apply You Blockhead font exclusively to the Hero Section Register Now button.
-   The #home parent ID ensures this only targets the HeroSection button,
-   NOT the Navbar Register buttons (which are fixed-position, not inside #home). */
-#home .btn-game {
+@font-face {
+  font-family: "You Blockhead";
+  src: url("/fonts/YouBlockheadOpen.ttf") format("truetype"),
+       url("/fonts/YouBlockhead.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Apply You Blockhead font exclusively to the Register Now button text.
+   Targets the Register Now CTA button, NOT navbar elements, other buttons,
+   headings, or general website text. */
+#home .btn-game,
+#register .btn-game,
+.btn-register-team {
   font-family: "You Blockhead", "Cinzel", serif;
 }
 
@@ -530,4 +543,93 @@ body {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
   }
+}
+
+/* Footer social buttons */
+.footer-social-btn {
+  border: 1.5px solid rgba(200, 160, 40, 0.2);
+  color: #6B5030;
+  background: rgba(20, 12, 4, 0.5);
+  transition: all 0.2s ease;
+}
+.footer-social-btn:hover {
+  color: #FFD700;
+  border-color: rgba(255, 215, 0, 0.5);
+  transform: translateY(-2px);
+}
+
+
+/* ================================================================
+   Team Registration Form Styles
+   ================================================================ */
+.game-input-container {
+  position: relative;
+}
+
+.game-input {
+  width: 100%;
+  padding: 0.85rem 1rem 0.85rem 2.85rem;
+  background: rgba(24, 16, 9, 0.85);
+  border: 1.5px solid rgba(200, 160, 40, 0.35);
+  border-radius: 10px;
+  color: #FFF8E8;
+  font-family: var(--font-inter), sans-serif;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+  outline: none;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.game-input:focus {
+  border-color: #FFD700;
+  box-shadow: 0 0 16px rgba(255, 215, 0, 0.25), inset 0 1px 2px rgba(0, 0, 0, 0.4);
+  background: rgba(32, 20, 12, 0.95);
+}
+
+.game-input.input-error {
+  border-color: #FF5252;
+  box-shadow: 0 0 12px rgba(255, 82, 82, 0.25), inset 0 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+.game-input::placeholder {
+  color: #8B7355;
+  font-size: 0.9rem;
+}
+
+.btn-register-team {
+  font-family: "You Blockhead", "Cinzel", serif !important;
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.6),
+    inset 0 1px 0 rgba(255, 215, 0, 0.55),
+    inset 0 -2px 0 rgba(0, 0, 0, 0.4),
+    0 0 0 4px var(--brown-dark),
+    0 10px 0 #3D1A00,
+    0 14px 0 #2D0E00,
+    0 18px 30px rgba(0, 0, 0, 0.7),
+    0 0 35px rgba(255, 215, 0, 0.4);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+}
+
+.btn-register-team:hover {
+  transform: translateY(-3px);
+  filter: brightness(1.15);
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.8),
+    inset 0 1px 0 rgba(255, 215, 0, 0.6),
+    inset 0 -2px 0 rgba(0, 0, 0, 0.4),
+    0 0 0 4px var(--brown-dark),
+    0 13px 0 #3D1A00,
+    0 17px 0 #2D0E00,
+    0 24px 40px rgba(0, 0, 0, 0.8),
+    0 0 45px rgba(255, 215, 0, 0.6);
+}
+
+.btn-register-team:active {
+  transform: translateY(3px);
+  box-shadow:
+    inset 0 2px 5px rgba(0, 0, 0, 0.35),
+    0 0 0 4px var(--brown-dark),
+    0 4px 0 #3D1A00,
+    0 8px 16px rgba(0, 0, 0, 0.5),
+    0 0 20px rgba(255, 215, 0, 0.3);
 }

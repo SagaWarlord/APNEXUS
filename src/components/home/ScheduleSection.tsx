@@ -1,138 +1,121 @@
 "use client";
 
-import { TRACKS, SCHEDULE } from "@/lib/constants";
-import { Clock, Check } from "lucide-react";
+import { Clock } from "lucide-react";
 
-const ROUND_COLORS = [
-  { dot: "#4CAF50", line: "#4CAF50", bg: "#4CAF5018", border: "#4CAF5040" },
-  { dot: "#42A5F5", line: "#42A5F5", bg: "#42A5F518", border: "#42A5F540" },
-  { dot: "#FFD700", line: "#FFD700", bg: "#FFD70018", border: "#FFD70040" },
-];
-
-const ROUND_SUBACTIVITIES = [
-  [],
-  ["Submit website URL", "Submit GitHub repository", "Upload PPT/PDF presentation"],
-  ["Live demonstration to judges", "Technical Q&A session", "Architecture walkthrough", "Judges' evaluation"],
+const TIMELINE = [
+  {
+    time: "9:00 AM",
+    event: "Round 1 Begins",
+    sub: "Frontend Battle kicks off",
+    icon: "🎨",
+    color: "#4CAF50",
+    bg: "rgba(76,175,80,0.1)",
+    border: "rgba(76,175,80,0.4)",
+  },
+  {
+    time: "12:00 PM",
+    event: "Round 2 Begins",
+    sub: "Full-Stack Battle · Round 1 submissions close",
+    icon: "⚙️",
+    color: "#F5A623",
+    bg: "rgba(245,166,35,0.1)",
+    border: "rgba(245,166,35,0.4)",
+  },
+  {
+    time: "6:00 PM",
+    event: "Final Battle Begins",
+    sub: "Round 2 submissions close · Physical presentations start",
+    icon: "🏆",
+    color: "#FFD700",
+    bg: "rgba(255,215,0,0.1)",
+    border: "rgba(255,215,0,0.4)",
+  },
+  {
+    time: "9:00 PM",
+    event: "Event Concludes",
+    sub: "Results announced · Prizes awarded",
+    icon: "🎉",
+    color: "#FF6B35",
+    bg: "rgba(255,107,53,0.1)",
+    border: "rgba(255,107,53,0.4)",
+  },
 ];
 
 export default function ScheduleSection() {
   return (
-    <section id="schedule" className="relative py-24 section-bg-forest overflow-hidden">
-      <div className="section-divider absolute top-0 left-0 right-0" />
+    <section id="schedule" className="relative py-20 section-stone overflow-hidden">
+      <div className="gold-divider absolute top-0 left-0 right-0" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="absolute inset-0 pointer-events-none opacity-5"
+        style={{ background: "radial-gradient(ellipse at 80% 50%, #FF8C00, transparent 60%)" }} />
+
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-16">
-          <div className="badge-gold inline-flex mb-4">📅 Event Day</div>
-          <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-black text-white mb-4">
-            DAY{" "}
-            <span className="gradient-text-gold">SCHEDULE</span>
-          </h2>
-          <p className="text-white text-lg">
-            6 November 2026 — Multi Purpose Hall, MMMUT, Gorakhpur
+        <div className="text-center mb-14">
+          <div className="wood-banner text-base sm:text-lg">Event Schedule</div>
+          <p className="text-sm sm:text-base mt-6" style={{ color: "#9B7A40" }}>
+            6 November 2026 · Multi Purpose Hall, MMMUT, Gorakhpur
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-          {/* Timeline */}
-          <div className="relative">
-            {/* Vertical line */}
-            <div className="absolute left-7 top-8 bottom-8 w-0.5 timeline-line opacity-30" />
+        {/* Timeline */}
+        <div className="relative">
+          {/* Vertical spine */}
+          <div
+            className="absolute left-[27px] sm:left-1/2 top-8 bottom-8 w-0.5 -translate-x-1/2"
+            style={{ background: "linear-gradient(180deg, #4CAF50, #F5A623, #FFD700, #FF6B35)", opacity: 0.35 }}
+          />
 
-            <div className="space-y-0">
-              {SCHEDULE.map((item, i) => {
-                const colors = ROUND_COLORS[i];
-                const subs = ROUND_SUBACTIVITIES[i];
+          <div className="space-y-0">
+            {TIMELINE.map((item, i) => (
+              <div key={i} className={`relative flex gap-4 sm:gap-0 ${i % 2 === 0 ? "sm:flex-row" : "sm:flex-row-reverse"}`}>
 
-                return (
-                  <div key={i} className="relative flex gap-6 group">
-                    {/* Timeline dot */}
-                    <div className="flex flex-col items-center z-10">
-                      <div
-                        className="w-14 h-14 rounded-full flex items-center justify-center text-lg border-2 flex-shrink-0 shadow-lg"
-                        style={{ borderColor: colors.dot, background: colors.bg, boxShadow: `0 0 16px ${colors.bg}` }}
-                      >
-                        {i === 0 ? "🎨" : i === 1 ? "⚙️" : "🏆"}
-                      </div>
-                      {i < SCHEDULE.length - 1 && (
-                        <div className="w-0.5 h-8 mt-1" style={{ background: colors.line, opacity: 0.3 }} />
-                      )}
+                {/* Content card */}
+                <div className={`w-full sm:w-[calc(50%-44px)] ${i % 2 === 0 ? "sm:pr-8" : "sm:pl-8"} pb-8`}>
+                  <div
+                    className="p-5 rounded-xl transition-all hover:-translate-y-1"
+                    style={{
+                      background: item.bg,
+                      border: `1.5px solid ${item.border}`,
+                      boxShadow: `0 4px 20px rgba(0,0,0,0.5), 0 0 12px ${item.bg}`,
+                    }}
+                  >
+                    <div className="flex items-center gap-2 mb-2">
+                      <Clock className="w-4 h-4" style={{ color: item.color }} />
+                      <span className="font-cinzel font-black text-lg" style={{ color: item.color }}>
+                        {item.time}
+                      </span>
                     </div>
-
-                    {/* Content */}
-                    <div className="pb-8 flex-1">
-                      <div
-                        className="p-5 rounded-xl border transition-all group-hover:scale-[1.01]"
-                        style={{ background: colors.bg, borderColor: colors.border }}
-                      >
-                        <div className="flex items-center gap-2 mb-1">
-                          <Clock className="w-3.5 h-3.5" style={{ color: colors.dot }} />
-                          <span className="text-xs font-bold tracking-wider" style={{ color: "#FFFFFF" }}>
-                            {item.time}
-                          </span>
-                        </div>
-                        <h3 className="font-display font-bold text-white text-lg mb-1">{item.label}</h3>
-                        <p className="text-white text-sm mb-3">{item.sub}</p>
-
-                        {subs.length > 0 && (
-                          <ul className="space-y-1.5">
-                            {subs.map((s) => (
-                              <li key={s} className="flex items-center gap-2 text-xs text-white">
-                                <Check className="w-3.5 h-3.5 flex-shrink-0" style={{ color: colors.dot }} />
-                                {s}
-                              </li>
-                            ))}
-                          </ul>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* Tracks section */}
-          <div>
-            <h3 className="font-display text-2xl font-bold text-white mb-6 text-center lg:text-left">
-              CHALLENGE <span className="gradient-text-gold">TRACKS</span>
-            </h3>
-            <p className="text-white text-sm mb-8 text-center lg:text-left">
-              Three challenge categories judge different dimensions of your project.
-            </p>
-
-            <div className="space-y-4">
-              {TRACKS.map(({ id, name, description, icon }) => (
-                <div key={id} className="game-card p-6 flex gap-4 items-start">
-                  <div className="text-3xl flex-shrink-0">{icon}</div>
-                  <div>
-                    <h4 className="font-display font-bold text-white text-sm tracking-wider uppercase mb-1">
-                      {name}
-                    </h4>
-                    <p className="text-white text-sm leading-relaxed">{description}</p>
+                    <h3 className="font-cinzel font-bold text-base sm:text-lg mb-1" style={{ color: "#F5E6C8" }}>
+                      {item.event}
+                    </h3>
+                    <p className="text-xs sm:text-sm leading-relaxed" style={{ color: "#9B7A40" }}>{item.sub}</p>
                   </div>
                 </div>
-              ))}
-            </div>
 
-            {/* Event date callout */}
-            <div className="mt-8 p-6 rounded-xl bg-gradient-to-r from-[rgba(245,166,35,0.1)] to-[rgba(245,166,35,0.05)] border border-[rgba(245,166,35,0.3)]">
-              <p className="font-display text-center text-white font-bold text-lg">
-                📅 6 November 2026
-              </p>
-              <p className="text-center text-white text-sm mt-1">
-                9:00 AM – 9:00 PM IST
-              </p>
-              <p className="text-center text-white text-xs mt-1">
-                Multi Purpose Hall, MMMUT, Gorakhpur
-              </p>
-            </div>
+                {/* Timeline dot (desktop centre, mobile left) */}
+                <div className="absolute left-0 sm:left-1/2 sm:-translate-x-1/2 top-4 z-10">
+                  <div
+                    className="w-14 h-14 rounded-full flex items-center justify-center text-xl border-2 ml-0 sm:ml-0"
+                    style={{
+                      background: `linear-gradient(135deg, ${item.bg}, rgba(20,12,4,0.9))`,
+                      borderColor: item.border,
+                      boxShadow: `0 0 16px ${item.color}50, 0 4px 12px rgba(0,0,0,0.5)`,
+                    }}
+                  >
+                    {item.icon}
+                  </div>
+                </div>
+
+                {/* Spacer for alternating layout */}
+                <div className="hidden sm:block w-[calc(50%-44px)]" />
+              </div>
+            ))}
           </div>
         </div>
       </div>
 
-      <div className="section-divider absolute bottom-0 left-0 right-0" />
+      <div className="gold-divider absolute bottom-0 left-0 right-0" />
     </section>
   );
 }
-

@@ -1,6 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Home, Trophy, Code2, Gift, Users, HelpCircle, Menu, X, Crown } from "lucide-react";
 
 const NAV_ITEMS = [
@@ -8,7 +10,7 @@ const NAV_ITEMS = [
   { label: "About",   href: "#about",    icon: Trophy },
   { label: "Rules",   href: "#rounds",   icon: Code2 },
   { label: "Prizes",  href: "#prizes",   icon: Gift },
-  { label: "Register",href: "#register", icon: Users },
+  { label: "Register",href: "/register", icon: Users },
   { label: "FAQ",     href: "#faq",      icon: HelpCircle },
 ];
 
@@ -16,6 +18,7 @@ export default function Navbar() {
   const [scrolled, setScrolled]   = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [active, setActive]       = useState("home");
+  const pathname = usePathname();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 30);
@@ -23,10 +26,17 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const scrollTo = (href: string) => {
+  const handleNavClick = (href: string) => {
     setMobileOpen(false);
+    if (href.startsWith("/")) {
+      return;
+    }
     const id = href.replace("#", "");
     setActive(id);
+    if (pathname !== "/") {
+      window.location.href = "/" + href;
+      return;
+    }
     const el = document.getElementById(id);
     if (el) el.scrollIntoView({ behavior: "smooth" });
   };
@@ -48,7 +58,7 @@ export default function Navbar() {
           <div className="flex items-center justify-between h-16 lg:h-[72px]">
 
             {/* ── Logo ── */}
-            <button onClick={() => scrollTo("#home")} className="flex items-center gap-3 group cursor-pointer shrink-0">
+            <Link href="/" className="flex items-center gap-3 group cursor-pointer shrink-0">
               <div className="relative w-11 h-11 flex items-center justify-center">
                 <div
                   className="absolute inset-0 rounded-xl"
@@ -77,16 +87,38 @@ export default function Navbar() {
                   A Tech Event
                 </span>
               </div>
-            </button>
+            </Link>
 
             {/* ── Desktop Nav ── */}
             <div className="hidden lg:flex items-center gap-6">
               {NAV_ITEMS.map(({ label, href, icon: Icon }) => {
-                const isActive = active === href.replace("#", "");
+                const isRoute = href.startsWith("/");
+                const isActive = isRoute ? pathname === href : active === href.replace("#", "") && pathname === "/";
+                
+                if (isRoute) {
+                  return (
+                    <Link
+                      key={href}
+                      href={href}
+                      className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-left cursor-pointer transition-all group relative"
+                      style={{
+                        color: "#FFFFFF",
+                        border: isActive ? `1px solid var(--border-gold)` : "transparent",
+                        background: isActive ? "rgba(255, 215, 0, 0.08)" : "transparent",
+                      }}
+                    >
+                      <Icon className="w-5 h-5" style={{ color: isActive ? "var(--gold-primary)" : "var(--text-dim)" }} />
+                      <span className="text-sm font-medium tracking-wide font-cinzel transition-colors group-hover:text-white">
+                        {label}
+                      </span>
+                    </Link>
+                  );
+                }
+
                 return (
                   <button
                     key={href}
-                    onClick={() => scrollTo(href)}
+                    onClick={() => handleNavClick(href)}
                     className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-left cursor-pointer transition-all group relative"
                     style={{
                       color: "#FFFFFF",
@@ -103,11 +135,11 @@ export default function Navbar() {
               })}
             </div>
 
-            {/* ── Register Now CTA ── */}
+            {/* ── Register Now CTA -> /register ── */}
             <div className="hidden lg:block">
-              <button onClick={() => scrollTo("#register")} className="btn-game text-sm px-7 py-3">
+              <Link href="/register" className="btn-game text-sm px-7 py-3 inline-block">
                 Register Now &nbsp;›
-              </button>
+              </Link>
             </div>
 
             {/* ── Mobile toggle ── */}
@@ -141,24 +173,37 @@ export default function Navbar() {
         <div className="pt-[72px] pb-8 px-6">
           <div className="flex flex-col gap-1.5 mb-6">
             {NAV_ITEMS.map(({ label, href, icon: Icon }) => {
-              const isActive = active === href.replace("#", "");
+              const isRoute = href.startsWith("/");
+              const isActive = isRoute ? pathname === href : active === href.replace("#", "") && pathname === "/";
+              
+              if (isRoute) {
+                return (
+                  <Link
+                    key={href}
+                    href={href}
+                    onClick={() => setMobileOpen(false)}
+                    className="flex items-center gap-3.5 w-full px-5 py-3.5 rounded-xl text-left cursor-pointer transition-all group"
+                    style={{
+                      color: "#FFFFFF",
+                      background: isActive ? "rgba(255, 215, 0, 0.1)" : "transparent",
+                      border: isActive ? `1px solid var(--border-gold)` : "transparent",
+                    }}
+                  >
+                    <Icon className="w-6 h-6" style={{ color: isActive ? "var(--gold-primary)" : "var(--text-dim)" }} />
+                    <span className="font-cinzel font-semibold tracking-wide">{label}</span>
+                  </Link>
+                );
+              }
+
               return (
                 <button
                   key={href}
-                  onClick={() => scrollTo(href)}
+                  onClick={() => handleNavClick(href)}
                   className="flex items-center gap-3.5 w-full px-5 py-3.5 rounded-xl text-left cursor-pointer transition-all group"
                   style={{
                     color: "#FFFFFF",
                     background: isActive ? "rgba(255, 215, 0, 0.1)" : "transparent",
                     border: isActive ? `1px solid var(--border-gold)` : "transparent",
-                  }}
-                  onMouseEnter={e => {
-                    (e.currentTarget as HTMLElement).style.background = "rgba(200, 130, 0, 0.12)";
-                    (e.currentTarget as HTMLElement).style.color = "#FFFFFF";
-                  }}
-                  onMouseLeave={e => {
-                    (e.currentTarget as HTMLElement).style.background = isActive ? "rgba(255, 215, 0, 0.1)" : "transparent";
-                    (e.currentTarget as HTMLElement).style.color = "#FFFFFF";
                   }}
                 >
                   <Icon className="w-6 h-6" style={{ color: isActive ? "var(--gold-primary)" : "var(--text-dim)" }} />
@@ -167,9 +212,13 @@ export default function Navbar() {
               );
             })}
           </div>
-          <button onClick={() => scrollTo("#register")} className="btn-game w-full py-3.5 text-sm">
+          <Link
+            href="/register"
+            onClick={() => setMobileOpen(false)}
+            className="btn-game w-full py-3.5 text-sm inline-block text-center"
+          >
             Register Now &nbsp;›
-          </button>
+          </Link>
         </div>
       </div>
 

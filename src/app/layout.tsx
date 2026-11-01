@@ -27,7 +27,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "JOBREADY — A Tech Event | Build Your Base. Conquer the Code.",
+  title: "JOBREADY \u2014 A Tech Event | Build Your Base. Conquer the Code.",
   description:
     "JOBREADY is a three-round website development challenge at MMMUT Gorakhpur. Code, Build, Compete. 6 November 2026.",
   keywords: ["JOBREADY", "MMMUT", "tech event", "web development", "coding", "Gorakhpur"],
@@ -42,6 +42,20 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${lilitaOne.variable} ${cinzel.variable} ${inter.variable}`}>
+      <head>
+        <link
+          rel="preload"
+          href="/fonts/YouBlockheadOpen.ttf"
+          as="font"
+          type="font/ttf"
+          crossOrigin="anonymous"
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `if(typeof document!=='undefined'&&document.fonts){document.fonts.load('16px "You Blockhead"');document.fonts.load('bold 16px "You Blockhead"');}`
+          }}
+        />
+      </head>
       <body className="bg-[#1A1208] text-white overflow-x-hidden antialiased">
         {children}
       </body>

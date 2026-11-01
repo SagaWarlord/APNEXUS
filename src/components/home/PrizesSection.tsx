@@ -2,160 +2,132 @@
 
 const PRIZES = [
   {
-    rank: "Champion",
+    position: "1st",
+    title: "Champion",
     icon: "👑",
-    emoji: "🏆",
-    badge: "1st Place",
+    chest: "🏆",
     color: "#FFD700",
-    bg: "#FFD70012",
-    border: "#FFD70040",
-    glow: "rgba(255,215,0,0.25)",
-    desc: "[Prize details to be announced by the organiser]",
-    perks: ["Winner Trophy", "Certificate of Excellence", "Recognition across MMMUT community"],
+    bg: "rgba(255,215,0,0.08)",
+    border: "rgba(255,215,0,0.45)",
+    glow: "rgba(255,215,0,0.2)",
     featured: true,
+    placeholder: "Exciting rewards await the champion.",
   },
   {
-    rank: "Runner-up",
+    position: "2nd",
+    title: "Runner-up",
     icon: "🥈",
-    emoji: "🛡️",
-    badge: "2nd Place",
+    chest: "🛡️",
     color: "#C0C0C0",
-    bg: "#C0C0C012",
-    border: "#C0C0C040",
-    glow: "rgba(192,192,192,0.15)",
-    desc: "[Prize details to be announced by the organiser]",
-    perks: ["Runner-up Trophy", "Certificate of Merit", "Recognition across MMMUT community"],
+    bg: "rgba(192,192,192,0.07)",
+    border: "rgba(192,192,192,0.3)",
+    glow: "rgba(192,192,192,0.1)",
     featured: false,
+    placeholder: "Exciting rewards await the runner-up.",
   },
   {
-    rank: "Best Innovation",
+    position: "Special",
+    title: "Best Innovation",
     icon: "💡",
-    emoji: "⚡",
-    badge: "Special Award",
-    color: "#42A5F5",
-    bg: "#42A5F512",
-    border: "#42A5F540",
-    glow: "rgba(66,165,245,0.2)",
-    desc: "[Prize details to be announced by the organiser]",
-    perks: ["Innovation Award", "Certificate of Innovation", "Recognition across MMMUT community"],
+    chest: "⚡",
+    color: "#F5A623",
+    bg: "rgba(245,166,35,0.08)",
+    border: "rgba(245,166,35,0.35)",
+    glow: "rgba(245,166,35,0.15)",
     featured: false,
+    placeholder: "Special award for the most innovative project.",
   },
-];
-
-const SPONSORS = [
-  { tier: "Technology Partner", name: "[Sponsor Name]", placeholder: true },
-  { tier: "Community Partner", name: "[Sponsor Name]", placeholder: true },
-  { tier: "Innovation Partner", name: "[Sponsor Name]", placeholder: true },
 ];
 
 export default function PrizesSection() {
   return (
-    <section id="prizes" className="relative py-24 section-bg-emerald overflow-hidden">
-      <div className="section-divider absolute top-0 left-0 right-0" />
+    <section id="prizes" className="relative py-20 section-dark overflow-hidden">
+      <div className="gold-divider absolute top-0 left-0 right-0" />
 
-      {/* Decorative background */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden opacity-5">
-        <div className="absolute top-20 left-10 text-9xl">💎</div>
-        <div className="absolute bottom-20 right-10 text-9xl">🏆</div>
-      </div>
+      {/* Decorative */}
+      <div className="absolute bottom-8 left-4 text-8xl opacity-5 select-none">💎</div>
+      <div className="absolute top-8 right-4 text-8xl opacity-5 select-none">🏆</div>
+      <div className="absolute inset-0 pointer-events-none"
+        style={{ background: "radial-gradient(ellipse at 50% 100%, rgba(200,122,0,0.08) 0%, transparent 60%)" }} />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-16">
-          <div className="badge-gold inline-flex mb-4">🏆 Rewards</div>
-          <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-black text-white mb-4">
-            PRIZES &{" "}
-            <span className="gradient-text-gold">GLORY</span>
-          </h2>
-          <p className="text-white text-base max-w-xl mx-auto">
-            Compete for recognition, trophies and special awards. Prize values will be confirmed and updated by the organisers.
+        <div className="text-center mb-14">
+          <div className="wood-banner text-base sm:text-lg">Prizes & Glory</div>
+          <p className="text-sm sm:text-base mt-6" style={{ color: "#9B7A40" }}>
+            Compete. Conquer. Claim your rewards.
           </p>
-          <div className="inline-flex items-center gap-2 mt-4 px-4 py-2 bg-[rgba(245,166,35,0.08)] border border-[rgba(245,166,35,0.2)] rounded-full">
-            <span className="text-xs text-white">⚠ Prize details are placeholder — to be confirmed by organisers</span>
+          <div className="inline-flex items-center gap-2 mt-4 px-4 py-2 rounded-full text-xs"
+            style={{ background: "rgba(200,130,0,0.08)", border: "1px solid rgba(200,160,40,0.2)", color: "#9B7A40" }}>
+            ⚠ Prize details will be announced by the organisers
           </div>
         </div>
 
         {/* Prize cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
-          {PRIZES.map(({ rank, icon, emoji, badge, color, bg, border, glow, desc, perks, featured }) => (
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {PRIZES.map(({ position, title, icon, chest, color, bg, border, glow, featured, placeholder }) => (
             <div
-              key={rank}
-              className={`relative game-card p-8 text-center transition-all duration-300 hover:-translate-y-2 ${featured ? "md:-translate-y-4" : ""}`}
+              key={title}
+              className="relative text-center transition-all duration-300 hover:-translate-y-3"
               style={{
-                borderColor: border,
-                background: `linear-gradient(135deg, ${bg}, rgba(15,30,16,0.95))`,
-                boxShadow: featured ? `0 0 40px ${glow}, 0 8px 32px rgba(0,0,0,0.5)` : undefined,
+                background: `linear-gradient(145deg, #1C1510, #251D14)`,
+                border: `2px solid ${border}`,
+                borderRadius: "14px",
+                boxShadow: `0 8px 32px rgba(0,0,0,0.6), 0 0 ${featured ? "40px" : "20px"} ${glow}`,
+                marginTop: featured ? "0" : "0",
               }}
             >
+              {/* Top badge */}
               {featured && (
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                  <span className="px-4 py-1 rounded-full text-xs font-bold tracking-wider uppercase bg-gradient-to-r from-[#FFD700] to-[#F5A623] text-white">
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 z-10">
+                  <span className="px-4 py-1 rounded-full text-xs font-cinzel font-black tracking-wider uppercase text-[#1A0800]"
+                    style={{ background: "linear-gradient(90deg, #FFE566, #F5A623, #FFE566)" }}>
                     ⭐ Top Prize
                   </span>
                 </div>
               )}
 
-              {/* Trophy visual */}
-              <div className="relative mb-4">
-                <div
-                  className="w-24 h-24 mx-auto rounded-2xl flex items-center justify-center text-5xl border-2"
-                  style={{ borderColor: border, background: bg }}
-                >
-                  {icon}
+              <div className="p-8">
+                {/* Treasure chest / icon */}
+                <div className="relative mb-5 mx-auto w-24 h-24">
+                  <div
+                    className="w-24 h-24 rounded-2xl flex items-center justify-center text-5xl border-2 mx-auto"
+                    style={{ borderColor: border, background: bg, boxShadow: `0 0 20px ${glow}` }}
+                  >
+                    {icon}
+                  </div>
+                  <div className="absolute -bottom-2 -right-1 text-2xl">{chest}</div>
                 </div>
-                <div className="absolute -bottom-2 -right-2 text-2xl">{emoji}</div>
+
+                {/* Position badge */}
+                <div className="inline-flex items-center px-3 py-1 rounded-full text-xs font-cinzel font-bold tracking-wider uppercase mb-3"
+                  style={{ color, background: bg, border: `1px solid ${border}` }}>
+                  {position} Place
+                </div>
+
+                <h3 className="font-cinzel font-black text-2xl mb-4" style={{ color }}>
+                  {title}
+                </h3>
+
+                {/* Placeholder reward text */}
+                <div className="p-4 rounded-xl"
+                  style={{ background: "rgba(0,0,0,0.25)", border: `1px solid ${border}40` }}>
+                  <p className="text-sm italic leading-relaxed" style={{ color: "#9B7A40" }}>
+                    {placeholder}
+                  </p>
+                </div>
               </div>
-
-              <div
-                className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold tracking-wider uppercase mb-3"
-                style={{ color: "#FFFFFF", background: bg, border: `1px solid ${border}` }}
-              >
-                {badge}
-              </div>
-
-              <h3 className="font-display text-2xl font-black mb-3" style={{ color: "#FFFFFF" }}>
-                {rank}
-              </h3>
-
-              <p className="text-white text-sm italic mb-4">{desc}</p>
-
-              <ul className="space-y-2 text-left">
-                {perks.map((p) => (
-                  <li key={p} className="flex items-center gap-2 text-sm text-white">
-                    <span style={{ color: "#FFFFFF" }}>✓</span>
-                    {p}
-                  </li>
-                ))}
-              </ul>
             </div>
           ))}
         </div>
 
-        {/* Sponsors */}
-        <div>
-          <h3 className="text-center font-display text-2xl font-bold text-white mb-2">
-            SPONSORS & <span className="gradient-text-gold">PARTNERS</span>
-          </h3>
-          <p className="text-center text-white text-sm mb-8">
-            [Placeholder — actual sponsors to be confirmed and updated by organisers]
-          </p>
-
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            {SPONSORS.map(({ tier, name }) => (
-              <div key={tier} className="game-card p-6 text-center">
-                <div className="w-20 h-12 mx-auto mb-3 rounded-lg bg-[rgba(245,166,35,0.08)] border border-[rgba(245,166,35,0.2)] flex items-center justify-center">
-                  <span className="text-xs text-white italic">Logo</span>
-                </div>
-                <p className="text-white font-bold text-xs tracking-widest uppercase mb-1">{tier}</p>
-                <p className="text-white text-sm italic">{name}</p>
-              </div>
-            ))}
-          </div>
-        </div>
+        {/* Golden note */}
+        <p className="text-center text-xs mt-10 font-cinzel tracking-wider" style={{ color: "#6B5030" }}>
+          🏅 All participants receive a Certificate of Participation
+        </p>
       </div>
 
-      <div className="section-divider absolute bottom-0 left-0 right-0" />
+      <div className="gold-divider absolute bottom-0 left-0 right-0" />
     </section>
   );
 }
-

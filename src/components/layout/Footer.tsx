@@ -1,16 +1,24 @@
-import Link from "next/link";
-import { Shield, Mail, MapPin, Calendar } from "lucide-react";
-import { EVENT, NAV_LINKS } from "@/lib/constants";
+"use client";
 
-// Inline SVG icons — lucide-react in this version doesn't ship Twitter/Instagram/Github/LinkedIn
+import { Crown, Mail, MapPin, Calendar } from "lucide-react";
+
+const NAV_LINKS = [
+  { label: "Home",     href: "#home" },
+  { label: "About",   href: "#about" },
+  { label: "Rounds",  href: "#rounds" },
+  { label: "Schedule",href: "#schedule" },
+  { label: "Prizes",  href: "#prizes" },
+  { label: "FAQ",     href: "#faq" },
+];
+
 const TwitterIcon = () => (
   <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
     <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.74l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
   </svg>
 );
 const InstagramIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4">
-    <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4">
+    <rect width="20" height="20" x="2" y="2" rx="5" />
     <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
     <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
   </svg>
@@ -26,104 +34,121 @@ const GithubIcon = () => (
   </svg>
 );
 
-// Stable constant — avoids Next.js 16 prerender date restriction
+const SOCIAL = [
+  { Icon: TwitterIcon,   label: "Twitter" },
+  { Icon: InstagramIcon, label: "Instagram" },
+  { Icon: LinkedInIcon,  label: "LinkedIn" },
+  { Icon: GithubIcon,    label: "GitHub" },
+];
+
 const CURRENT_YEAR = 2026;
 
 export default function Footer() {
+  const scrollTo = (href: string) => {
+    const id = href.replace("#", "");
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+  };
 
   return (
-    <footer className="relative bg-[#080F09] border-t border-[rgba(245,166,35,0.15)]">
-      {/* Gold top line */}
-      <div className="section-divider" />
+    <footer
+      className="relative"
+      style={{
+        background: "linear-gradient(180deg, #120D08 0%, #0A0602 100%)",
+        borderTop: "2px solid rgba(200,160,40,0.2)",
+      }}
+    >
+      <div className="gold-divider" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+
           {/* Brand */}
           <div className="lg:col-span-2">
-            <div className="flex items-center gap-2.5 mb-4">
-              <div className="w-10 h-10 bg-gradient-to-br from-[#FFD700] to-[#B8860B] rounded-lg flex items-center justify-center shadow-lg">
-                <Shield className="w-6 h-6 text-[#1A1A1A] fill-[#1A1A1A]" />
+            <div className="flex items-center gap-3 mb-5">
+              <div
+                className="w-11 h-11 rounded-xl flex items-center justify-center"
+                style={{
+                  background: "linear-gradient(135deg, #FFE566, #F5A623, #8B4A00)",
+                  boxShadow: "0 0 0 2px #3D1A00, 0 4px 16px rgba(0,0,0,0.5)",
+                }}
+              >
+                <Crown className="w-6 h-6 text-[#2D0E00]" />
               </div>
               <div>
-                <div className="font-display text-xl font-bold text-white">JOBREADY</div>
-                <div className="text-[0.6rem] text-white tracking-[0.2em] uppercase">A Tech Event</div>
+                <div
+                  className="font-lilita text-2xl"
+                  style={{
+                    color: "#FFE566",
+                    textShadow: "-1px -1px 0 #2D0E00, 1px 1px 0 #8B4A00, 0 3px 0 #6B3200",
+                    letterSpacing: "0.06em",
+                  }}
+                >
+                  JOBREADY
+                </div>
+                <div className="text-[0.6rem] tracking-[0.25em] uppercase font-cinzel" style={{ color: "#9B7A40" }}>
+                  A Tech Event
+                </div>
               </div>
             </div>
-            <p className="text-white text-sm leading-relaxed mb-6 max-w-sm">
-              BUILD YOUR BASE. CONQUER THE CODE. A three-round website development challenge
-              where creativity meets engineering.
+
+            <p className="text-sm leading-relaxed mb-5 max-w-xs" style={{ color: "#9B7A40" }}>
+              A three-round website development challenge at MMMUT, Gorakhpur.
+              Code. Build. Compete.
             </p>
-            <div className="flex flex-col gap-2 text-sm text-white">
+
+            <div className="flex flex-col gap-2 text-sm" style={{ color: "#6B5030" }}>
               <div className="flex items-center gap-2">
-                <Calendar className="w-4 h-4 text-[#F5A623]" />
-                <span>{EVENT.dateLabel}</span>
+                <Calendar className="w-4 h-4" style={{ color: "#C87A00" }} />
+                <span>6 November 2026</span>
               </div>
               <div className="flex items-center gap-2">
-                <MapPin className="w-4 h-4 text-[#F5A623]" />
-                <span>{EVENT.venue}</span>
+                <MapPin className="w-4 h-4" style={{ color: "#C87A00" }} />
+                <span>Multi Purpose Hall, MMMUT, Gorakhpur</span>
               </div>
             </div>
           </div>
 
-          {/* Quick Links */}
+          {/* Navigation */}
           <div>
-            <h3 className="font-display text-sm font-bold text-white tracking-wider uppercase mb-4">
-              Navigation
-            </h3>
-            <ul className="flex flex-col gap-2">
-              {NAV_LINKS.map((link) => (
-                <li key={link.href}>
-                  <a
-                    href={link.href}
-                    className="text-white text-sm hover:text-white transition-colors"
+            <h4 className="font-cinzel font-bold text-sm tracking-[0.15em] uppercase mb-4" style={{ color: "#C87A00" }}>
+              Quick Links
+            </h4>
+            <ul className="flex flex-col gap-2.5">
+              {NAV_LINKS.map(({ label, href }) => (
+                <li key={href}>
+                  <button
+                    onClick={() => scrollTo(href)}
+                    className="text-sm transition-colors cursor-pointer hover:text-[#FFD700]"
+                    style={{ color: "#9B7A40", background: "none", border: "none", padding: 0 }}
                   >
-                    {link.label}
-                  </a>
+                    {label}
+                  </button>
                 </li>
               ))}
-              <li>
-                <Link href="/register" className="text-white text-sm hover:text-white transition-colors">
-                  Register
-                </Link>
-              </li>
-              <li>
-                <Link href="/login" className="text-white text-sm hover:text-white transition-colors">
-                  Login
-                </Link>
-              </li>
             </ul>
           </div>
 
           {/* Contact */}
           <div>
-            <h3 className="font-display text-sm font-bold text-white tracking-wider uppercase mb-4">
+            <h4 className="font-cinzel font-bold text-sm tracking-[0.15em] uppercase mb-4" style={{ color: "#C87A00" }}>
               Contact
-            </h3>
-            <div className="flex flex-col gap-3 text-sm text-white">
-              <div className="flex items-start gap-2">
-                <Mail className="w-4 h-4 mt-0.5 text-[#F5A623] flex-shrink-0" />
-                <span className="italic text-white opacity-70">[Contact email — to be confirmed]</span>
-              </div>
-              <div className="flex items-start gap-2">
-                <MapPin className="w-4 h-4 mt-0.5 text-[#F5A623] flex-shrink-0" />
-                <span className="text-xs text-white leading-relaxed">{EVENT.venueFull}</span>
+            </h4>
+            <div className="flex flex-col gap-3 mb-5">
+              <div className="flex items-start gap-2 text-sm" style={{ color: "#6B5030" }}>
+                <Mail className="w-4 h-4 mt-0.5 flex-shrink-0" style={{ color: "#C87A00" }} />
+                <span className="italic">[Contact email — to be confirmed]</span>
               </div>
             </div>
 
-            {/* Social placeholders */}
-            <div className="flex gap-3 mt-6">
-              {[
-                { Icon: TwitterIcon, label: "Twitter" },
-                { Icon: InstagramIcon, label: "Instagram" },
-                { Icon: LinkedInIcon, label: "LinkedIn" },
-                { Icon: GithubIcon, label: "GitHub" },
-              ].map(({ Icon, label }) => (
+            {/* Social icons — hover handled by CSS class in globals.css */}
+            <div className="flex gap-2.5">
+              {SOCIAL.map(({ Icon, label }) => (
                 <a
                   key={label}
                   href="#"
                   aria-label={label}
                   title={`${label} — coming soon`}
-                  className="w-9 h-9 flex items-center justify-center rounded-lg border border-[rgba(245,166,35,0.2)] text-white hover:text-white hover:border-[rgba(245,166,35,0.5)] transition-all hover:bg-[rgba(245,166,35,0.05)]"
+                  className="footer-social-btn w-9 h-9 flex items-center justify-center rounded-lg transition-all"
                 >
                   <Icon />
                 </a>
@@ -133,11 +158,12 @@ export default function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="mt-12 pt-6 border-t border-[rgba(45,90,48,0.3)] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white">
+        <div
+          className="mt-12 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs"
+          style={{ borderTop: "1px solid rgba(200,160,40,0.1)", color: "#4A3520" }}
+        >
           <p>© {CURRENT_YEAR} JOBREADY. All rights reserved. MMMUT, Gorakhpur.</p>
-          <p className="italic">
-            JobReady is an independent student tech event. Not affiliated with or endorsed by Supercell.
-          </p>
+          <p className="italic">JobReady is an independent student tech event. Not affiliated with Supercell.</p>
         </div>
       </div>
     </footer>

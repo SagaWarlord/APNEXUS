@@ -1,14 +1,17 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import { Calendar, Clock, MapPin, Users, ChevronDown } from "lucide-react";
 
-/* ── Countdown ── */
-function useCountdown(target: Date) {
+/* Countdown target */
+const BATTLE_TARGET_MS = new Date("2026-11-06T09:00:00+05:30").getTime();
+
+function useCountdown() {
   const [t, setT] = useState({ d: 0, h: 0, m: 0, s: 0 });
   useEffect(() => {
     const tick = () => {
-      const diff = Math.max(0, Math.floor((target.getTime() - Date.now()) / 1000));
+      const diff = Math.max(0, Math.floor((BATTLE_TARGET_MS - Date.now()) / 1000));
       setT({
         d: Math.floor(diff / 86400),
         h: Math.floor((diff % 86400) / 3600),
@@ -19,13 +22,13 @@ function useCountdown(target: Date) {
     tick();
     const id = setInterval(tick, 1000);
     return () => clearInterval(id);
-  }, [target]);
+  }, []);
   return t;
 }
 
 function pad(n: number) { return String(n).padStart(2, "0"); }
 
-/* ── Info panels ── */
+/* Info panels */
 const INFO_PANELS = [
   { icon: Calendar, label: "Event Date",  value: "6th November, 2026" },
   { icon: Clock,    label: "Timings",     value: "9 AM – 9 PM" },
@@ -36,8 +39,7 @@ const INFO_PANELS = [
 export default function HeroSection() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [videoReady, setVideoReady] = useState(false);
-  const target = new Date("2026-11-06T09:00:00+05:30");
-  const { d, h, m, s } = useCountdown(target);
+  const { d, h, m, s } = useCountdown();
 
   useEffect(() => {
     const v = videoRef.current;
@@ -54,9 +56,7 @@ export default function HeroSection() {
       id="home"
       className="relative min-h-screen flex flex-col overflow-hidden"
     >
-      {/* ══════════════════════════════════════════════════════
-          VIDEO BACKGROUND
-      ══════════════════════════════════════════════════════ */}
+      {/* VIDEO BACKGROUND */}
       <div className="absolute inset-0 z-0">
         {/* Fallback gradient (shown while video loads or if unavailable) */}
         <div
@@ -127,9 +127,7 @@ export default function HeroSection() {
         />
       </div>
 
-      {/* ══════════════════════════════════════════════════════
-          HERO CONTENT
-      ══════════════════════════════════════════════════════ */}
+      {/* HERO CONTENT */}
       <div className="relative z-20 flex flex-col items-center justify-center flex-1 px-4 sm:px-6 lg:px-8 pt-28 pb-6 text-center">
 
         {/* CODE • BUILD • COMPETE eyebrow */}
@@ -141,7 +139,7 @@ export default function HeroSection() {
           <div className="h-px flex-1 sm:w-24" style={{ background: "linear-gradient(270deg, transparent, rgba(200,160,40,0.6), transparent)" }} />
         </div>
 
-        {/* ── JOBREADY main title ── */}
+        {/* JOBREADY main title */}
         <h1
           className="game-title animate-glow animate-float-up select-none"
           style={{
@@ -192,18 +190,18 @@ export default function HeroSection() {
           ))}
         </div>
 
-        {/* Register Now button */}
+        {/* Register Now button -> Navigates to /register */}
         <div className="animate-float-up" style={{ animationDelay: "0.6s" }}>
-          <button onClick={() => document.getElementById("register")?.scrollIntoView({ behavior: "smooth" })}
-            className="btn-game text-base sm:text-lg px-10 sm:px-14 py-4">
+          <Link
+            href="/register"
+            className="btn-game text-base sm:text-lg px-10 sm:px-14 py-4 inline-block"
+          >
             Register Now &nbsp;›
-          </button>
+          </Link>
         </div>
       </div>
 
-      {/* ══════════════════════════════════════════════════════
-          INFO PANELS STRIP  (4 horizontal cards)
-      ══════════════════════════════════════════════════════ */}
+      {/* INFO PANELS STRIP (4 horizontal cards) */}
       <div className="relative z-20 px-4 sm:px-6 lg:px-8 pb-10">
         <div className="max-w-5xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
           {INFO_PANELS.map(({ icon: Icon, label, value, sub }) => (

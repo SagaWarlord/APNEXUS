@@ -1,73 +1,100 @@
 "use client";
 
 import Link from "next/link";
-import { Calendar, MapPin, Users, ArrowRight } from "lucide-react";
-import { EVENT } from "@/lib/constants";
 
 export default function RegistrationCTA() {
   return (
-    <section id="register" className="relative py-24 section-bg-emerald overflow-hidden">
-      <div className="section-divider absolute top-0 left-0 right-0" />
+    <section id="register" className="relative py-20 overflow-hidden">
+      <div className="gold-divider absolute top-0 left-0 right-0" />
 
-      {/* Glow effects */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-[rgba(245,166,35,0.06)] rounded-full blur-3xl" />
-      </div>
+      {/* Warm atmospheric background */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background: `
+            radial-gradient(ellipse at 50% 0%,   rgba(180,90,0,0.25) 0%, transparent 55%),
+            radial-gradient(ellipse at 20% 100%, rgba(120,50,0,0.15) 0%, transparent 50%),
+            radial-gradient(ellipse at 80% 100%, rgba(100,40,0,0.15) 0%, transparent 50%),
+            linear-gradient(180deg, #1E1510 0%, #2A1C0E 50%, #1E1510 100%)
+          `,
+        }}
+      />
 
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-        {/* Main heading */}
-        <div className="mb-8">
-          <div className="badge-gold inline-flex mb-6">⚔ Join the Battle</div>
-          <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-black text-white leading-tight mb-6">
-            YOUR TEAM.{" "}
-            <span className="gradient-text-gold">YOUR STRATEGY.</span>
-            {" "}YOUR VICTORY.
-          </h2>
-          <p className="text-white text-lg max-w-2xl mx-auto leading-relaxed">
-            Assemble your squad, sharpen your code and prepare for the ultimate web development challenge.
-            The arena awaits.
-          </p>
+      {/* Decorative corner gems */}
+      <div className="absolute top-6 left-6 text-4xl opacity-20 select-none rotate-[-15deg]">💎</div>
+      <div className="absolute top-6 right-6 text-4xl opacity-20 select-none rotate-[15deg]">💎</div>
+      <div className="absolute bottom-6 left-6 text-3xl opacity-15 select-none">🗡️</div>
+      <div className="absolute bottom-6 right-6 text-3xl opacity-15 select-none">🗡️</div>
+
+      <div className="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+
+        {/* Wooden top banner */}
+        <div className="wood-banner text-base sm:text-xl mb-8">
+          ⚔ Ready for the Battle? ⚔
         </div>
 
-        {/* Stats */}
-        <div className="flex flex-wrap justify-center gap-6 mb-10">
+        {/* Main heading */}
+        <h2
+          className="font-lilita mb-4 leading-tight"
+          style={{
+            fontSize: "clamp(2.2rem, 7vw, 5rem)",
+            color: "#FFE566",
+            textShadow: `
+              -2px -2px 0 #2D0E00, 2px -2px 0 #2D0E00,
+              -2px 2px 0 #2D0E00,  2px  2px 0 #2D0E00,
+              0 3px 0 #CC7800, 0 4px 0 #A05800, 0 5px 0 #7C4200,
+              0 10px 20px rgba(0,0,0,0.7)
+            `,
+            letterSpacing: "0.04em",
+          }}
+        >
+          READY FOR THE BATTLE?
+        </h2>
+
+        <p className="text-base sm:text-xl leading-relaxed mb-10" style={{ color: "#C4A878" }}>
+          Build your base. Show your skills.{" "}
+          <span style={{ color: "#FFD700", fontWeight: 700 }}>Conquer the code.</span>
+        </p>
+
+        {/* Stats row */}
+        <div className="flex flex-wrap justify-center gap-4 mb-10">
           {[
-            { icon: Users, label: "Max Team Size", value: "3 Members" },
-            { icon: Calendar, label: "Event Date", value: EVENT.dateLabel },
-            { icon: MapPin, label: "Venue", value: "MMMUT, Gorakhpur" },
-          ].map(({ icon: Icon, label, value }) => (
+            { icon: "📅", label: "Event Date", value: "6 November 2026" },
+            { icon: "👥", label: "Team Size",  value: "1–3 Members" },
+            { icon: "📍", label: "Venue",      value: "MMMUT, Gorakhpur" },
+          ].map(({ icon, label, value }) => (
             <div
               key={label}
-              className="game-card px-6 py-4 flex items-center gap-3 min-w-[180px]"
+              className="flex items-center gap-2.5 px-5 py-3 rounded-xl"
+              style={{
+                background: "rgba(20,12,4,0.6)",
+                border: "1.5px solid rgba(200,160,40,0.35)",
+                boxShadow: "0 4px 16px rgba(0,0,0,0.4)",
+              }}
             >
-              <Icon className="w-6 h-6 text-[#F5A623] flex-shrink-0" />
+              <span className="text-xl">{icon}</span>
               <div className="text-left">
-                <p className="text-xs text-white tracking-wider uppercase">{label}</p>
-                <p className="font-display font-bold text-white text-sm">{value}</p>
+                <p className="text-[0.6rem] font-cinzel tracking-wider uppercase" style={{ color: "#9B7A40" }}>{label}</p>
+                <p className="text-sm font-cinzel font-bold" style={{ color: "#FFD700" }}>{value}</p>
               </div>
             </div>
           ))}
         </div>
 
-        {/* CTA */}
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <Link href="/register" className="btn-gold text-lg px-10 py-5 gap-3">
-            <span>⚔ Register Your Team</span>
-            <ArrowRight className="w-5 h-5" />
-          </Link>
-          <Link href="/login" className="btn-outline-gold text-base px-8 py-4">
-            Already have an account? Login
-          </Link>
-        </div>
+        {/* CTA Button -> Navigates to /register */}
+        <Link
+          href="/register"
+          className="btn-game text-lg sm:text-xl px-12 sm:px-16 py-4 sm:py-5 inline-block"
+        >
+          ⚔ REGISTER NOW ›
+        </Link>
 
-        {/* Trust note */}
-        <p className="text-white text-sm mt-8">
-          Free to participate. Open to all students. Maximum 3 members per team.
+        <p className="text-xs mt-6 font-cinzel tracking-wider" style={{ color: "#6B5030" }}>
+          Assemble your squad and join the competition.
         </p>
       </div>
 
-      <div className="section-divider absolute bottom-0 left-0 right-0" />
+      <div className="gold-divider absolute bottom-0 left-0 right-0" />
     </section>
   );
 }
-
